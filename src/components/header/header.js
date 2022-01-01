@@ -19,9 +19,15 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
 
 const styles = {
   menuItem: {
-    padding: ".3rem 1.5rem",
+    padding: ".5rem 1rem",
+    "& .material-icons": {
+      marginTop: ".2rem",
+      marginRight: "1rem",
+      fontSize: "1.3rem",
+    },
   },
   typography: {
+    lineHeight: "1rem",
     fontSize: "1rem",
   },
 }
@@ -180,6 +186,19 @@ const Header = (props) => {
                 display: { xs: "block" },
               }}>
               <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                <span className="material-icons">extension</span>
+                <a
+                  href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
+                  target="_blank"
+                  rel="noreferrer">
+                  <Typography textAlign="center" sx={styles.typography}>
+                    Chrome Extension
+                  </Typography>
+                </a>
+              </MenuItem>
+
+              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                <span className="material-icons">article</span>
                 <a
                   href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
                   target="_blank"
@@ -191,6 +210,7 @@ const Header = (props) => {
               </MenuItem>
 
               <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                <span className="material-icons">contact_support</span>
                 <a href="mailto:marcoprouve@gmail.com">
                   <Typography textAlign="center" sx={styles.typography}>
                     Contact Support

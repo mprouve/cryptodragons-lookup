@@ -3,6 +3,47 @@ import theme from "../../../../res/theme.js"
 
 export const MainContainer = styled.div``
 
+export const BannerOuterContainer = styled.div`
+  background-color: #333;
+`
+
+export const BannerInnerContainer = styled.div`
+  display: block;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  text-align: center;
+
+  @media (max-width: 900px) {
+    padding: 1.5rem 2rem;
+  }
+`
+
+export const BannerText = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem;
+  font-size: ${theme.typography.fontSizes.regular};
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${theme.typography.fontColor.light};
+
+  & > a {
+    text-decoration: underline;
+
+    &:link,
+    &:visited,
+    &:active {
+      color: ${theme.typography.fontColor.light};
+    }
+  }
+
+  @media (max-width: 900px) {
+    display: block;
+    margin-bottom: 1rem;
+  }
+`
+
 export const HeroContainer = styled.div`
   background-image: linear-gradient(
     75deg,

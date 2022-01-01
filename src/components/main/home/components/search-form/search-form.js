@@ -154,7 +154,7 @@ const SearchForm = ({ setTab }) => {
   const handleGetEggs = () => {
     setProcessing(true)
 
-    dispatch(getEggs({ search: splitSearch.join("%2C"), page: 1, limit: 0 }))
+    dispatch(getEggs({ search: splitSearch.join("%2C"), page: 1, limit: 50, isMock: false }))
       .then((data) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
@@ -203,8 +203,6 @@ const SearchForm = ({ setTab }) => {
         owner: search,
         currentUserId: search,
         status: "arena%2Cfight%2Csale%2Csiring%2Cnone",
-        page: 1,
-        limit: 0,
         showBlacklisted: true,
         isMock: false,
       })

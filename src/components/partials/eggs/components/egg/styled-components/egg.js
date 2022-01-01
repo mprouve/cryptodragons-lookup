@@ -2,6 +2,7 @@ import styled from "styled-components"
 import theme from "../../../../../../res/theme.js"
 
 export const MainContainer = styled.div`
+  position: relative;
   display: inline-block;
   width: 30%;
   margin: 1rem 1.5%;
@@ -138,9 +139,10 @@ export const StatLabel = styled.p`
 `
 
 export const StatValue = styled.p`
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
   font-size: ${theme.typography.fontSizes.small};
   font-weight: ${theme.typography.fontWeight.regular};
   line-height: 1.2rem;
   color: ${theme.typography.fontColor.general};
+  text-transform: capitalize;
 `

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import theme from "../../../../../../res/theme.js"
 
 export const MainContainer = styled.div`
+  position: relative;
   display: inline-block;
   width: 30%;
   margin: 1rem 1.5%;
@@ -12,12 +13,12 @@ export const MainContainer = styled.div`
   text-align: left;
   box-shadow: 0 0 6px ${theme.palette.primary};
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     width: 45%;
     margin: 1rem 2.5%;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     width: 100%;
     margin: 1rem 0;
   }
@@ -49,11 +50,20 @@ export const Name = styled.p`
   white-space: nowrap;
 `
 
+export const BadgeContainer = styled.div`
+  margin-top: 0;
+
+  & > div:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`
+
 export const TypeContainer = styled.div`
   background-color: ${({ color }) => color};
   display: inline-block;
   margin-top: 0.5rem;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  vertical-align: middle;
   border-radius: 0.3rem;
 `
 
@@ -62,7 +72,7 @@ export const TypeText = styled.div`
   display: inline-block;
   vertical-align: middle;
   font-size: ${theme.typography.fontSizes.smaller};
-  font-weight: ${theme.typography.fontWeight.regular};
+  font-weight: ${theme.typography.fontWeight.semiBold};
   line-height: 0.8rem;
   color: ${theme.typography.fontColor.light};
 `
@@ -80,10 +90,26 @@ export const Tier = styled.div`
   color: ${({ color }) => color};
 `
 
+export const Badge = styled.div`
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  display: ${({ show }) => (show ? "inline-block" : "none")};
+  ${"" /* border: 1px solid #ccc; */}
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  ${"" /* padding: 0.3rem 0.5rem 0.3rem 0.5rem; */}
+  margin-top: 0.5rem;
+  vertical-align: middle;
+  border-radius: 0.3rem;
+  line-height: 0.9rem;
+  font-size: ${theme.typography.fontSizes.smaller};
+  font-weight: ${theme.typography.fontWeight.semiBold};
+  line-height: 0.8rem;
+  color: ${theme.typography.fontColor.light};
+`
+
 export const Separator = styled.div`
   display: block;
   width: 4rem;
-  margin: 1.5rem auto .5rem auto;
+  margin: 1.5rem auto 0.5rem auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `
 
@@ -148,9 +174,10 @@ export const StatLabel = styled.p`
 `
 
 export const StatValue = styled.p`
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
   font-size: ${theme.typography.fontSizes.small};
   font-weight: ${theme.typography.fontWeight.regular};
   line-height: 1.2rem;
   color: ${theme.typography.fontColor.general};
+  text-transform: capitalize;
 `
