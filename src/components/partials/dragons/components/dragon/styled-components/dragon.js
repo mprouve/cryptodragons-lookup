@@ -13,12 +13,12 @@ export const MainContainer = styled.div`
   text-align: left;
   box-shadow: 0 0 6px ${theme.palette.primary};
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     width: 45%;
     margin: 1rem 2.5%;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     width: 100%;
     margin: 1rem 0;
   }
@@ -50,10 +50,18 @@ export const Name = styled.p`
   white-space: nowrap;
 `
 
+export const BadgeContainer = styled.div`
+  margin-top: 0;
+
+  & > div:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`
+
 export const TypeContainer = styled.div`
   background-color: ${({ color }) => color};
   display: inline-block;
-  margin: 0.5rem .5rem 0 0;
+  margin-top: 0.5rem;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   vertical-align: middle;
   border-radius: 0.3rem;
@@ -64,7 +72,7 @@ export const TypeText = styled.div`
   display: inline-block;
   vertical-align: middle;
   font-size: ${theme.typography.fontSizes.smaller};
-  font-weight: ${theme.typography.fontWeight.regular};
+  font-weight: ${theme.typography.fontWeight.semiBold};
   line-height: 0.8rem;
   color: ${theme.typography.fontColor.light};
 `
@@ -82,9 +90,9 @@ export const Tier = styled.div`
   color: ${({ color }) => color};
 `
 
-export const Blacklisted = styled.div`
-  background-color: #333;
-  display: ${({ blacklisted }) => (blacklisted ? "inline-block" : "none")};
+export const Badge = styled.div`
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  display: ${({ show }) => (show ? "inline-block" : "none")};
   ${"" /* border: 1px solid #ccc; */}
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   ${"" /* padding: 0.3rem 0.5rem 0.3rem 0.5rem; */}
@@ -93,7 +101,7 @@ export const Blacklisted = styled.div`
   border-radius: 0.3rem;
   line-height: 0.9rem;
   font-size: ${theme.typography.fontSizes.smaller};
-  font-weight: ${theme.typography.fontWeight.regular};
+  font-weight: ${theme.typography.fontWeight.semiBold};
   line-height: 0.8rem;
   color: ${theme.typography.fontColor.light};
 `

@@ -5,10 +5,11 @@ import {
   Image,
   Name,
   ID,
+  BadgeContainer,
   TypeContainer,
   TypeText,
   Tier,
-  Blacklisted,
+  Badge,
   Separator,
   StatsContainer,
   Stat,
@@ -35,6 +36,8 @@ const Dragon = ({ dragon }) => {
     totalBreed,
     imageURL,
     tier,
+    fatherId,
+    motherId,
     strength,
     fifteens,
     totalTraits,
@@ -73,17 +76,26 @@ const Dragon = ({ dragon }) => {
 
       <ID>{`#${id}`}</ID>
       <Name>{name}</Name>
-      <TypeContainer
-        color={getTypeColor()}
-        style={
-          type === "Common" ? { padding: "0.5rem 0.5rem 0.5rem 0.5rem" } : {}
-        }>
-        <TypeText>{type}</TypeText>
 
-        {type !== "Common" && <Tier color={getTypeColor()}>{tier}</Tier>}
-      </TypeContainer>
+      <BadgeContainer>
+        <TypeContainer
+          color={getTypeColor()}
+          style={
+            type === "Common" ? { padding: "0.5rem 0.5rem 0.5rem 0.5rem" } : {}
+          }>
+          <TypeText>{type}</TypeText>
 
-      <Blacklisted blacklisted={isBlacklisted}>Blacklisted</Blacklisted>
+          {type !== "Common" && <Tier color={getTypeColor()}>{tier}</Tier>}
+        </TypeContainer>
+
+        <Badge show={isBlacklisted} backgroundColor={"#333"}>
+          Blacklisted
+        </Badge>
+
+        <Badge show={!fatherId && !motherId} backgroundColor={"red"}>
+          Firstborn
+        </Badge>
+      </BadgeContainer>
 
       <Separator />
 

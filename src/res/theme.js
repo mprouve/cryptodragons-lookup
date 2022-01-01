@@ -31,7 +31,7 @@ const theme = {
   },
   palette: {
     primary: "#ff6666",
-    secondary: "#60D7FC",
+    secondary: "#2eb2fa",
     tertiary: "#F7BD37",
     common: {
       white: "#ffffff",

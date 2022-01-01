@@ -31,6 +31,13 @@ const Footer = (props) => {
             Dragon Breeding Guide
           </Link>
 
+          <Link
+            href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
+            target="_blank"
+            rel="noreferrer">
+            Chrome Extension
+          </Link>
+
           <a href="mailto:marcoprouve@gmail.com">Contact Support</a>
         </Links>
 
