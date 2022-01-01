@@ -34,7 +34,8 @@ const Home = () => {
           <Heading>Welcome CryptoDragons Owners</Heading>
           <Subheading>
             Thank you for stopping by. You can use this form to get detailed
-            info on your dragons or eggs, including <b>Arena Strength</b>,{" "}
+            info on dragons and eggs, including <b>Arena Strength</b>,{" "}
+            <b>Arena Record</b>, <b>Blacklist Status</b>,{" "}
             <b>Total Trait Score</b>, and more.
           </Subheading>
 

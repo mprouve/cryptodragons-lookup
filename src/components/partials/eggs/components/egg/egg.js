@@ -1,4 +1,5 @@
 import React from "react"
+import IconButton from "@mui/material/IconButton"
 // import filter from "lodash/filter"
 import {
   MainContainer,
@@ -17,40 +18,32 @@ import {
   StatValue,
 } from "./styled-components/egg.js"
 
-const Egg = ({ egg }) => {
-  const { id, name, isHatched, dragonId, type, imageURL } = egg
-  // const { tier, strength } = getTierAndStrength(type, genome)
+const styles = {
+  link: {
+    position: "absolute",
+    top: ".5rem",
+    right: ".5rem",
+  },
+}
 
-  // const getTypeColor = () => {
-  //   switch (dragon.type) {
-  //     case "Common":
-  //       return "#999"
-  //     case "Rare":
-  //       return "blue"
-  //     case "Epic":
-  //       return "purple"
-  //     case "Legendary":
-  //       return "orange"
-  //     default:
-  //       return "#999"
-  //   }
-  // }
+const Egg = ({ egg }) => {
+  const { id, name, isHatched, dragonId, type, status, imageURL } = egg
 
   return (
     <MainContainer>
+      <a
+        href={`https://cryptodragons.com/egg/${id}`}
+        target="_blank"
+        rel="noreferrer">
+        <IconButton sx={styles.link}>
+          <span className="material-icons">launch</span>
+        </IconButton>
+      </a>
+
       <Image src={imageURL} alt={`CryptoDragon image for egg #${id}`} />
 
       <ID>{`#${id}`}</ID>
       <Name>{name}</Name>
-      {/* <TypeContainer
-        color={getTypeColor()}
-        style={
-          type === "Common" ? { padding: "0.5rem 0.5rem 0.5rem 0.5rem" } : {}
-        }>
-        <TypeText>{type}</TypeText>
-
-        {type !== "Common" && <Tier color={getTypeColor()}>{tier}</Tier>}
-      </TypeContainer> */}
 
       <Separator />
 
@@ -68,7 +61,7 @@ const Egg = ({ egg }) => {
 
         <Stat>
           <StatIconContainer>
-            <span className="material-icons">info</span>
+            <span className="material-icons">scatter_plot</span>
           </StatIconContainer>
 
           <StatContent>
@@ -88,16 +81,16 @@ const Egg = ({ egg }) => {
           </StatContent>
         </Stat>
 
-        {/* <Stat>
+        <Stat>
           <StatIconContainer>
-            <span className="material-icons">lock</span>
+            <span className="material-icons">info</span>
           </StatIconContainer>
 
           <StatContent>
-            <StatLabel>Locked</StatLabel>
-            <StatValue>{isLocked ? "Yes" : "No"}</StatValue>
+            <StatLabel>Status</StatLabel>
+            <StatValue>{status}</StatValue>
           </StatContent>
-        </Stat> */}
+        </Stat>
       </StatsContainer>
     </MainContainer>
   )

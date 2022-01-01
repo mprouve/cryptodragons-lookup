@@ -2,6 +2,7 @@ import styled from "styled-components"
 import theme from "../../../../../../res/theme.js"
 
 export const MainContainer = styled.div`
+  position: relative;
   display: inline-block;
   width: 30%;
   margin: 1rem 1.5%;
@@ -52,8 +53,9 @@ export const Name = styled.p`
 export const TypeContainer = styled.div`
   background-color: ${({ color }) => color};
   display: inline-block;
-  margin-top: 0.5rem;
+  margin: 0.5rem .5rem 0 0;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  vertical-align: middle;
   border-radius: 0.3rem;
 `
 
@@ -80,10 +82,26 @@ export const Tier = styled.div`
   color: ${({ color }) => color};
 `
 
+export const Blacklisted = styled.div`
+  background-color: #333;
+  display: ${({ blacklisted }) => (blacklisted ? "inline-block" : "none")};
+  ${"" /* border: 1px solid #ccc; */}
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  ${"" /* padding: 0.3rem 0.5rem 0.3rem 0.5rem; */}
+  margin-top: 0.5rem;
+  vertical-align: middle;
+  border-radius: 0.3rem;
+  line-height: 0.9rem;
+  font-size: ${theme.typography.fontSizes.smaller};
+  font-weight: ${theme.typography.fontWeight.regular};
+  line-height: 0.8rem;
+  color: ${theme.typography.fontColor.light};
+`
+
 export const Separator = styled.div`
   display: block;
   width: 4rem;
-  margin: 1.5rem auto .5rem auto;
+  margin: 1.5rem auto 0.5rem auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `
 
@@ -148,9 +166,10 @@ export const StatLabel = styled.p`
 `
 
 export const StatValue = styled.p`
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
   font-size: ${theme.typography.fontSizes.small};
   font-weight: ${theme.typography.fontWeight.regular};
   line-height: 1.2rem;
   color: ${theme.typography.fontColor.general};
+  text-transform: capitalize;
 `

@@ -1,7 +1,5 @@
 import React from "react"
-import getTierAndStrength from "../../../../../utils/functions/get-tier-and-strength.js"
-import getTraitsMeta from "../../../../../utils/functions/get-traits-meta.js"
-// import filter from "lodash/filter"
+import IconButton from "@mui/material/IconButton"
 import {
   MainContainer,
   Image,
@@ -10,6 +8,7 @@ import {
   TypeContainer,
   TypeText,
   Tier,
+  Blacklisted,
   Separator,
   StatsContainer,
   Stat,
@@ -19,9 +18,30 @@ import {
   StatValue,
 } from "./styled-components/dragon.js"
 
+const styles = {
+  link: {
+    position: "absolute",
+    top: ".5rem",
+    right: ".5rem",
+  },
+}
+
 const Dragon = ({ dragon }) => {
-  const { id, type, name, totalBreed, imageURL, genome } = dragon
-  const { tier, strength } = getTierAndStrength(type, genome)
+  const {
+    id,
+    isBlacklisted,
+    type,
+    name,
+    totalBreed,
+    imageURL,
+    tier,
+    strength,
+    fifteens,
+    totalTraits,
+    battleAmount,
+    battleWinsAmount,
+    status,
+  } = dragon
 
   const getTypeColor = () => {
     switch (dragon.type) {
@@ -40,6 +60,15 @@ const Dragon = ({ dragon }) => {
 
   return (
     <MainContainer>
+      <a
+        href={`https://cryptodragons.com/dragon/${id}`}
+        target="_blank"
+        rel="noreferrer">
+        <IconButton sx={styles.link}>
+          <span className="material-icons">launch</span>
+        </IconButton>
+      </a>
+
       <Image src={imageURL} alt={`CryptoDragon image for dragon #${id}`} />
 
       <ID>{`#${id}`}</ID>
@@ -53,6 +82,8 @@ const Dragon = ({ dragon }) => {
 
         {type !== "Common" && <Tier color={getTypeColor()}>{tier}</Tier>}
       </TypeContainer>
+
+      <Blacklisted blacklisted={isBlacklisted}>Blacklisted</Blacklisted>
 
       <Separator />
 
@@ -70,12 +101,25 @@ const Dragon = ({ dragon }) => {
 
         <Stat>
           <StatIconContainer>
+            <span className="material-icons">emoji_events</span>
+          </StatIconContainer>
+
+          <StatContent>
+            <StatLabel>Arena W/L</StatLabel>
+            <StatValue>{`${battleWinsAmount} - ${
+              battleAmount - battleWinsAmount
+            }`}</StatValue>
+          </StatContent>
+        </Stat>
+
+        <Stat>
+          <StatIconContainer>
             <span className="material-icons">bloodtype</span>
           </StatIconContainer>
 
           <StatContent>
             <StatLabel>Trait Score</StatLabel>
-            <StatValue>{`${getTraitsMeta(genome).total}/375`}</StatValue>
+            <StatValue>{`${totalTraits}/375`}</StatValue>
           </StatContent>
         </Stat>
 
@@ -86,20 +130,9 @@ const Dragon = ({ dragon }) => {
 
           <StatContent>
             <StatLabel>#15 Traits</StatLabel>
-            <StatValue>{`${getTraitsMeta(genome).fifteens}`}</StatValue>
+            <StatValue>{`${fifteens}`}</StatValue>
           </StatContent>
         </Stat>
-
-        {/* <Stat>
-          <StatIconContainer>
-            <span className="material-icons">info</span>
-          </StatIconContainer>
-
-          <StatContent>
-            <StatLabel>Status</StatLabel>
-            <StatValue>{status}</StatValue>
-          </StatContent>
-        </Stat> */}
 
         <Stat>
           <StatIconContainer>
@@ -109,6 +142,17 @@ const Dragon = ({ dragon }) => {
           <StatContent>
             <StatLabel>Breeds</StatLabel>
             <StatValue>{totalBreed}</StatValue>
+          </StatContent>
+        </Stat>
+
+        <Stat>
+          <StatIconContainer>
+            <span className="material-icons">info</span>
+          </StatIconContainer>
+
+          <StatContent>
+            <StatLabel>Status</StatLabel>
+            <StatValue>{status}</StatValue>
           </StatContent>
         </Stat>
 
