@@ -1,4 +1,4 @@
-const getRefFromDotString = require('./get-ref-from-dot-string.js')
+import getRefFromDotString from './get-ref-from-dot-string.js'
 
 // PARAMS:
 // arr => array to be sorted
@@ -62,4 +62,4 @@ const nestedSort = (arr, order, key1, key2) => {
   })
 }
 
-module.exports = nestedSort
+export default nestedSort
