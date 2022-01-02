@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton"
 // import filter from "lodash/filter"
 import {
   MainContainer,
+  FloatingMeta,
   Image,
   Name,
   ID,
@@ -27,10 +28,32 @@ const styles = {
 }
 
 const Egg = ({ egg }) => {
-  const { id, name, isHatched, dragonId, type, status, imageURL } = egg
+  const {
+    id,
+    price,
+    name,
+    isHatched,
+    dragonId,
+    type,
+    status,
+    imageURL,
+  } = egg
 
   return (
     <MainContainer>
+      {price !== "0" && (
+        <FloatingMeta>
+          {/* <span className="material-icons">favorite</span>
+        <span
+          style={
+            price !== "0" ? { marginRight: "1rem" } : {}
+          }>{`${likes}`}</span> */}
+
+          <span className="material-icons">local_offer</span>
+          <span>{`${price} ETH`}</span>
+        </FloatingMeta>
+      )}
+
       <a
         href={`https://cryptodragons.com/egg/${id}`}
         target="_blank"

@@ -10,6 +10,8 @@ const getTierAndStrength = (type, genome) => {
       tier += 1
       strength += trait * 1 * geneNum
     } else if (geneNum >= 16 && geneNum <= 19) {
+      // console.log("GeneNum: ", geneNum)
+
       if (type === "Rare" && trait > 0) {
         tier += 1
       } else if (type !== "Common" && type !== "Rare") {
@@ -18,7 +20,9 @@ const getTierAndStrength = (type, genome) => {
 
       strength += trait * 2 * geneNum
     } else if (geneNum >= 20 && geneNum <= 24) {
-      if (type === "Epic" && trait > 0) {
+      if (geneNum === 20 && type === "Rare" && trait > 0) {
+        tier += 1
+      } else if (type === "Epic" && trait > 0) {
         tier += 1
       } else if (type !== "Common" && type !== "Rare" && type !== "Epic") {
         tier += 1
