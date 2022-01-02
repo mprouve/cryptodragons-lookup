@@ -6,7 +6,13 @@ export const Form = styled.form`
 `
 
 export const OptionsContainer = styled.div`
-  & > div:nth-child(1) {
+  & > div {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  ${
+    "" /* & > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
 
@@ -23,5 +29,6 @@ export const OptionsContainer = styled.div`
   & > div:nth-child(2) {
     display: block;
     margin-top: 1rem;
+  } */
   }
 `

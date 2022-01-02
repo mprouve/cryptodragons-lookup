@@ -1,12 +1,35 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getDragons } from "../../../../../../../redux/thunks/dragons/get-dragons.js"
+import { dragonsQueryActions } from "../../../../../../../redux/action-creators/dragons-query.js"
 import TypeToggle from "./components/type-toggle/type-toggle.js"
 import StatusToggle from "./components/status-toggle/status-toggle.js"
 import SortToggle from "./components/sort-toggle/sort-toggle.js"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
 import { Form, OptionsContainer } from "./styled-components/dragons-search.js"
+
+const getConditionalQueryKeys = (sortBy) => {
+  const queryKeys = {
+    page: 1,
+    sortBy,
+    limit: 20,
+    customSort: "",
+  }
+
+  if (
+    sortBy === "strength" ||
+    sortBy === "fifteens" ||
+    sortBy === "totalTraits"
+  ) {
+    queryKeys.page = 0
+    queryKeys.sortBy = ""
+    queryKeys.limit = 9999
+    queryKeys.customSort = sortBy
+  }
+
+  return queryKeys
+}
 
 const styles = {
   button: {
@@ -38,23 +61,22 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
 
     setProcessing(true)
 
-    dispatch(
-      getDragons({
-        typeFilter: typeFilter.join("%2C"),
-        status: status.join("%2C"),
-        sortBy,
-        sortDirection,
-        page: 1,
-        limit: 50,
-        from: 0,
-        showBlacklisted: true,
-        isMock: false,
-      })
-    )
+    const query = {
+      ...getConditionalQueryKeys(sortBy),
+      typeFilter: typeFilter.join("%2C"),
+      status: status.join("%2C"),
+      sortDirection,
+      from: 0,
+      showBlacklisted: true,
+      isMock: false,
+    }
+
+    dispatch(getDragons(query, false))
       .then((data) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
 
+          dispatch(dragonsQueryActions.set(query))
           setError("")
         } else {
           console.log("[FAIL]: ", data.message)
@@ -74,19 +96,14 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <OptionsContainer>
-        <div>
-          <TypeToggle typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
-          <SortToggle
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            sortDirection={sortDirection}
-            setSortDirection={setSortDirection}
-          />
-        </div>
-
-        <div>
-          <StatusToggle status={status} setStatus={setStatus} />
-        </div>
+        <SortToggle
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          sortDirection={sortDirection}
+          setSortDirection={setSortDirection}
+        />
+        <TypeToggle typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
+        <StatusToggle status={status} setStatus={setStatus} />
       </OptionsContainer>
 
       <Button

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getEggs } from "../../../../../../../redux/thunks/eggs/get-eggs.js"
+import { eggsQueryActions } from "../../../../../../../redux/action-creators/eggs-query.js"
 import HatchedToggle from "./components/hatched-toggle/hatched-toggle.js"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -33,16 +34,16 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
 
     setProcessing(true)
 
-    dispatch(
-      getEggs({
-        isHatched,
-        page: 1,
-        limit: 50,
-        from: 0,
-        isMock: false,
-        showBlacklisted: true,
-      })
-    )
+    const query = {
+      isHatched,
+      page: 1,
+      limit: 20,
+      from: 0,
+      isMock: false,
+      showBlacklisted: true,
+    }
+
+    dispatch(getEggs(query, false))
       .then((data) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
@@ -53,6 +54,7 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
             setTab("eggs")
           }
 
+          dispatch(eggsQueryActions.set(query))
           setError("")
         } else {
           console.log("[FAIL]: ", data.message)

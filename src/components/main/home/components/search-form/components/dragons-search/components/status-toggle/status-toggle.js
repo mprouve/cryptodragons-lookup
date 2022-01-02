@@ -6,10 +6,13 @@ const styles = {
   button: {
     borderRadius: "0",
     textTransform: "none",
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     minHeight: "2.7rem",
     height: "2.7rem",
+    minWidth: 'auto',
     width: "20.1%",
+    padding: "10px",
+    overflow: "hidden",
     transition: "all .3s ease-in-out",
     "&.MuiButton-outlined": {
       borderColor: "#eee",
@@ -29,10 +32,10 @@ const styles = {
       backgroundColor: "#ddd",
       borderColor: "#ddd",
     },
-    "@media (max-width: 425px)": {
-      minWidth: "60px",
-      padding: "0px",
-    },
+    // "@media (max-width: 425px)": {
+    //   minWidth: "60px",
+    //   padding: "10px",
+    // },
   },
   buttonLeft: {
     borderRadius: ".3rem",

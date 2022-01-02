@@ -4,6 +4,7 @@
 
 export const dragonsActionTypes = {
   SET_DRAGONS: "SET_DRAGONS",
+  ADD_DRAGONS: "ADD_DRAGONS",
   CLEAR_DRAGONS: "CLEAR_DRAGONS",
 }
 
@@ -19,6 +20,13 @@ const set = (dragons) => {
   }
 }
 
+const add = (dragons) => {
+  return {
+    type: dragonsActionTypes.ADD_DRAGONS,
+    dragons,
+  }
+}
+
 const clear = () => {
   return {
     type: dragonsActionTypes.CLEAR_DRAGONS,
@@ -27,5 +35,6 @@ const clear = () => {
 
 export const dragonsActions = {
   set,
+  add,
   clear,
 }

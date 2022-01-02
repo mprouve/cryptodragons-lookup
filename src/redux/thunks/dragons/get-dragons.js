@@ -6,7 +6,7 @@ import objectToQueryString from "../../../utils/functions/object-to-query-string
 /*
  * METHOD TO GET DRAGONS BY IDs
  */
-export const getDragons = (params) => {
+export const getDragons = (params, loadMore) => {
   let responseCode = ""
   const method = "GET"
   let url = `${config.api}/dragons`
@@ -15,7 +15,9 @@ export const getDragons = (params) => {
   }
 
   // Use objectToQueryString util function to turn params into a query string and append it to URL
-  url += objectToQueryString({ ...params })
+  let queryParams = { ...params }
+  // delete queryParams.customSort
+  url += objectToQueryString(queryParams)
 
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
@@ -38,7 +40,12 @@ export const getDragons = (params) => {
 
         if (responseCode === 200) {
           dispatch(toasterActions.set("Successfully retrieved dragons!"))
-          dispatch(dragonsActions.set(data.items))
+
+          if (loadMore) {
+            dispatch(dragonsActions.add(data.items))
+          } else {
+            dispatch(dragonsActions.set(data.items))
+          }
 
           return {
             error: false,

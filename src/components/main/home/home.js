@@ -84,10 +84,12 @@ const Home = () => {
         <Tab selected={tab === "dragons"} onClick={() => setTab("dragons")}>
           {`Dragons (${dragons.length})`} <div />
         </Tab>
+
         <Tab selected={tab === "eggs"} onClick={() => setTab("eggs")}>
           {`Eggs (${unhatchedEggs.length})`}
           <div />
         </Tab>
+
         <Tab selected={tab === "eggshells"} onClick={() => setTab("eggshells")}>
           {`Eggshells (${hatchedEggs.length})`}
           <div />
@@ -96,8 +98,8 @@ const Home = () => {
 
       <ContentContainer>
         {tab === "dragons" && <Dragons dragons={dragons} />}
-        {tab === "eggs" && <Eggs eggs={unhatchedEggs} />}
-        {tab === "eggshells" && <Eggs eggs={hatchedEggs} />}
+        {tab === "eggs" && <Eggs eggs={unhatchedEggs} isHatched={false} />}
+        {tab === "eggshells" && <Eggs eggs={hatchedEggs} isHatched={true} />}
       </ContentContainer>
     </MainContainer>
   )

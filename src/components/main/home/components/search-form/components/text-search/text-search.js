@@ -4,6 +4,8 @@ import { getDragons } from "../../../../../../../redux/thunks/dragons/get-dragon
 import { getEggs } from "../../../../../../../redux/thunks/eggs/get-eggs.js"
 import { getDragon } from "../../../../../../../redux/thunks/dragons/get-dragon.js"
 import { getEgg } from "../../../../../../../redux/thunks/eggs/get-egg.js"
+import { dragonsQueryActions } from "../../../../../../../redux/action-creators/dragons-query.js"
+import { eggsQueryActions } from "../../../../../../../redux/action-creators/eggs-query.js"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
 import { Form, Input } from "./styled-components/text-search.js"
@@ -69,6 +71,8 @@ const TextSearch = ({ searchType, processing, setProcessing, setError }) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
 
+          dispatch(dragonsQueryActions.clear())
+          dispatch(eggsQueryActions.clear())
           setError("")
         } else {
           console.log("[FAIL]: ", data.message)
@@ -93,6 +97,8 @@ const TextSearch = ({ searchType, processing, setProcessing, setError }) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
 
+          dispatch(dragonsQueryActions.clear())
+          dispatch(eggsQueryActions.clear())
           setError("")
         } else {
           console.log("[FAIL]: ", data.message)
@@ -131,6 +137,8 @@ const TextSearch = ({ searchType, processing, setProcessing, setError }) => {
             if (!data1.error) {
               console.log("[SUCCESS]: ", data1.message)
 
+              dispatch(dragonsQueryActions.clear())
+              dispatch(eggsQueryActions.clear())
               setError("")
             } else {
               console.log("[FAIL]: ", data1.message)

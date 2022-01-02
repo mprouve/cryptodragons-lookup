@@ -6,7 +6,7 @@ import objectToQueryString from "../../../utils/functions/object-to-query-string
 /*
  * METHOD TO GET EGGS BY IDs
  */
-export const getEggs = (params) => {
+export const getEggs = (params, loadMore) => {
   let responseCode = ""
   const method = "GET"
   let url = `${config.api}/eggs`
@@ -38,7 +38,12 @@ export const getEggs = (params) => {
 
         if (responseCode === 200) {
           dispatch(toasterActions.set("Successfully retrieved eggs!"))
-          dispatch(eggsActions.set(data.items))
+
+          if (loadMore) {
+            dispatch(eggsActions.add(data.items))
+          } else {
+            dispatch(eggsActions.set(data.items))
+          }
 
           return {
             error: false,
