@@ -39,8 +39,7 @@ const Dragon = ({ dragon }) => {
     totalBreed,
     imageURL,
     tier,
-    fatherId,
-    motherId,
+    firstborn,
     strength,
     fifteens,
     totalTraits,
@@ -70,10 +69,12 @@ const Dragon = ({ dragon }) => {
         <span className="material-icons">favorite</span>
         <span
           style={
-            status === "sale" ? { marginRight: "1rem" } : {}
+            status === "sale" || status === "siring"
+              ? { marginRight: "1rem" }
+              : {}
           }>{`${likes}`}</span>
 
-        {status === "sale" && (
+        {(status === "sale" || status === "siring") && (
           <>
             <span className="material-icons">local_offer</span>
             <span>{`${price} ETH`}</span>
@@ -110,7 +111,7 @@ const Dragon = ({ dragon }) => {
           Blacklisted
         </Badge>
 
-        <Badge show={!fatherId && !motherId} backgroundColor={"red"}>
+        <Badge show={firstborn} backgroundColor={"red"}>
           Firstborn
         </Badge>
       </BadgeContainer>

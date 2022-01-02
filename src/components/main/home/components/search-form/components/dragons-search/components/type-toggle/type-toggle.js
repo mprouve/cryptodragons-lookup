@@ -8,6 +8,10 @@ const styles = {
     textTransform: "none",
     minHeight: "2.7rem",
     height: "2.7rem",
+    minWidth: 'auto',
+    width: '25.1%',
+    padding: "10px",
+    overflow: "hidden",
     transition: "all .3s ease-in-out",
     "&.MuiButton-outlined": {
       borderColor: "#eee",
@@ -27,10 +31,10 @@ const styles = {
       backgroundColor: "#ddd",
       borderColor: "#ddd",
     },
-    "@media (max-width: 425px)": {
-      minWidth: "60px",
-      padding: "10px",
-    },
+    // "@media (max-width: 425px)": {
+    //   minWidth: "60px",
+    //   padding: "10px",
+    // },
   },
   buttonLeft: {
     borderRadius: ".3rem",
