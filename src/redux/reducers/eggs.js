@@ -1,16 +1,7 @@
 import { eggsActionTypes } from "../action-creators/eggs.js"
 
-// const copyTakes = (takes) => {
-//   return takes.map((take) => {
-//     return {
-//       ...take,
-//       tagIds: take.tagIds ? [...take.tagIds] : [],
-//       location: { ...take.location },
-//       visibleTo: { ...take.visibleTo },
-//       votes:
-//         take.votes.length === 0 ? [] : take.votes.map((vote) => ({ ...vote })),
-//     }
-//   })
+// const copyEggs = (eggs) => {
+//   return eggs.map((egg) => ({ ...egg }))
 // }
 
 // FOR EGGS

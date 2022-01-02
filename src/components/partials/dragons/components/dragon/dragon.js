@@ -17,6 +17,7 @@ import {
   StatContent,
   StatLabel,
   StatValue,
+  FloatingMeta,
 } from "./styled-components/dragon.js"
 
 const styles = {
@@ -30,6 +31,8 @@ const styles = {
 const Dragon = ({ dragon }) => {
   const {
     id,
+    likes,
+    price,
     isBlacklisted,
     type,
     name,
@@ -63,6 +66,21 @@ const Dragon = ({ dragon }) => {
 
   return (
     <MainContainer>
+      <FloatingMeta>
+        <span className="material-icons">favorite</span>
+        <span
+          style={
+            status === "sale" ? { marginRight: "1rem" } : {}
+          }>{`${likes}`}</span>
+
+        {status === "sale" && (
+          <>
+            <span className="material-icons">local_offer</span>
+            <span>{`${price} ETH`}</span>
+          </>
+        )}
+      </FloatingMeta>
+
       <a
         href={`https://cryptodragons.com/dragon/${id}`}
         target="_blank"

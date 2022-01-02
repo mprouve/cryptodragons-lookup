@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   display: inline-block;
   width: 30%;
   margin: 1rem 1.5%;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 1rem;
@@ -21,6 +21,44 @@ export const MainContainer = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     margin: 1rem 0;
+  }
+`
+
+export const FloatingMeta = styled.div`
+  background-color: #fff;
+  display: block;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+
+  & > span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & .material-icons {
+    color: #cc0000;
+    fontsize: 1.3rem;
+  }
+
+  & > span:nth-child(2) {
+    margin-left: 0.3rem;
+    line-height: 1.1rem;
+    font-size: ${theme.typography.fontSizes.regular};
+    font-weight: ${theme.typography.fontWeight.regular};
+    color: ${theme.typography.fontColor.general};
+  }
+
+  & > span:nth-child(4) {
+    margin-left: 0.3rem;
+    line-height: 1.1rem;
+    font-size: ${theme.typography.fontSizes.regular};
+    font-weight: ${theme.typography.fontWeight.regular};
+    color: ${theme.typography.fontColor.general};
   }
 `
 

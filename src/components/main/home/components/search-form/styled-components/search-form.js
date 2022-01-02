@@ -44,57 +44,22 @@ export const Tab = styled.div`
   }
 `
 
-export const Form = styled.form`
+export const FormsContainer = styled.div`
   display: block;
   width: 40rem;
   margin: 2rem auto 0 auto;
-  text-align: center;
 
   @media (max-width: 700px) {
     width: 100%;
   }
 `
 
-export const Input = styled.input`
-  background-color: #fff;
-  display: inline-block;
-  width: 74%;
-  height: 2.7rem;
-  padding: 0.8rem 1rem;
-  vertical-align: middle;
-  border: none;
-  border-radius: 0.3rem;
-  font-family: ${theme.typography.fontFamily};
-  font-size: ${theme.typography.fontSizes.short};
-  font-weight: ${theme.typography.fontWeight.light};
-  color: ${theme.typography.fontColor.general};
-
-  &:focus,
-  &:hover,
-  &:active {
-    border: none;
-    outline: none;
-  }
-
-  &::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: ${theme.typography.fontColor.header};
-  }
-  ::-moz-placeholder {
-    /* Firefox 19+ */
-    color: ${theme.typography.fontColor.header};
-  }
-  :-ms-input-placeholder {
-    /* IE 10+ */
-    color: ${theme.typography.fontColor.header};
-  }
-  :-moz-placeholder {
-    /* Firefox 18- */
-    color: ${theme.typography.fontColor.header};
-  }
-
-  @media (max-width: 700px) {
-    display: block;
-    width: 100%;
-  }
+export const Or = styled.p`
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: ${theme.typography.fontSizes.large};
+  font-weight: ${theme.typography.fontWeight.regular};
+  color: ${theme.typography.fontColor.light};
+  text-transform: uppercase;
 `
