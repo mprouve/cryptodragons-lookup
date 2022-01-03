@@ -40,6 +40,7 @@ export const getDragon = (params) => {
             error: false,
             code: responseCode,
             message: "Successfully retrieved dragon!",
+            data
           }
         }
 

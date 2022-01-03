@@ -11,6 +11,7 @@ const styles = {
     minWidth: 'auto',
     width: '25.1%',
     padding: "10px",
+    fontSize: ".9rem",
     overflow: "hidden",
     transition: "all .3s ease-in-out",
     "&.MuiButton-outlined": {

@@ -4,6 +4,7 @@ import theme from "../../../../res/theme.js"
 export const MainContainer = styled.div`
   text-align: center;
   font-size: 0;
+  position: relative;
 `
 
 export const NoResults = styled.div`

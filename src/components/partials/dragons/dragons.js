@@ -23,6 +23,16 @@ const getSortedDragons = (dragons, query) => {
 }
 
 const styles = {
+  // topLoadButton: {
+  //   display: "block",
+  //   width: "10rem",
+  //   minHeight: "2.3rem",
+  //   height: "2.3rem",
+  //   lineHeight: ".8rem",
+  //   position: "absolute",
+  //   bottom: "0rem",
+  //   right: "0rem",
+  // },
   circularProgress: {
     display: "block",
     width: "17px !important",
@@ -69,6 +79,19 @@ const Dragons = ({ dragons }) => {
 
   return (
     <MainContainer>
+      {/* <Button
+        variant="outlined"
+        color="secondary"
+        sx={styles.topLoadButton}
+        onClick={handleLoadMore}
+        disabled={processing}>
+        {processing ? (
+          <CircularProgress color="secondary" sx={styles.circularProgress} />
+        ) : (
+          `Load ${dragonsQuery.limit} More`
+        )}
+      </Button> */}
+
       {sortedDragons.length &&
         sortedDragons.map((dragon) => {
           return <Dragon key={dragon.id} dragon={dragon} />
@@ -99,7 +122,7 @@ const Dragons = ({ dragons }) => {
                   sx={styles.circularProgress}
                 />
               ) : (
-                "Load More"
+                `Load ${dragonsQuery.limit} More`
               )}
             </Button>
           </div>

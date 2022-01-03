@@ -8,7 +8,7 @@ class ScrollToTop extends React.Component {
     super(props)
 
     this.state = {
-      showScrollToTopButton: false,
+      showButton: false,
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -24,21 +24,21 @@ class ScrollToTop extends React.Component {
   }
 
   handleScroll() {
-    const { showScrollToTopButton } = this.state
+    const { showButton } = this.state
 
     if (window.scrollY > 100) {
-      if (!showScrollToTopButton) {
+      if (!showButton) {
         window.removeEventListener("scroll", this.handleScroll)
 
-        this.setState({ showScrollToTopButton: true }, () => {
+        this.setState({ showButton: true }, () => {
           window.addEventListener("scroll", this.handleScroll)
         })
       }
     } else {
-      if (showScrollToTopButton) {
+      if (showButton) {
         window.removeEventListener("scroll", this.handleScroll)
 
-        this.setState({ showScrollToTopButton: false }, () => {
+        this.setState({ showButton: false }, () => {
           window.addEventListener("scroll", this.handleScroll)
         })
       }
@@ -53,13 +53,13 @@ class ScrollToTop extends React.Component {
   }
 
   render() {
-    const { showScrollToTopButton } = this.state
+    const { showButton } = this.state
     const { children } = this.props
 
-    if (!showScrollToTopButton) return null
+    if (!showButton) return null
 
     return (
-      <Zoom in={showScrollToTopButton}>
+      <Zoom in={showButton}>
         <Box
           onClick={this.handleClick}
           role="presentation"

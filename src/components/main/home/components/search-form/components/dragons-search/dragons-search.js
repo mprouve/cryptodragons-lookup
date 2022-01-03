@@ -1,19 +1,18 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getDragons } from "../../../../../../../redux/thunks/dragons/get-dragons.js"
 import { dragonsQueryActions } from "../../../../../../../redux/action-creators/dragons-query.js"
 import TypeToggle from "./components/type-toggle/type-toggle.js"
 import StatusToggle from "./components/status-toggle/status-toggle.js"
 import SortToggle from "./components/sort-toggle/sort-toggle.js"
+import LimitSelect from "../../../../../../partials/limit-select/limit-select.js"
 import Button from "@mui/material/Button"
 import CircularProgress from "@mui/material/CircularProgress"
 import { Form, OptionsContainer } from "./styled-components/dragons-search.js"
 
 const getConditionalQueryKeys = (sortBy) => {
   const queryKeys = {
-    page: 1,
     sortBy,
-    limit: 20,
     customSort: "",
   }
 
@@ -22,9 +21,7 @@ const getConditionalQueryKeys = (sortBy) => {
     sortBy === "fifteens" ||
     sortBy === "totalTraits"
   ) {
-    queryKeys.page = 0
     queryKeys.sortBy = ""
-    queryKeys.limit = 9999
     queryKeys.customSort = sortBy
   }
 
@@ -37,6 +34,16 @@ const styles = {
     width: "100%",
     height: "2.7rem",
     marginTop: "1rem",
+  },
+  loadMoreButton: {
+    marginTop: "1rem",
+    color: "#eee",
+    borderColor: "#eee",
+    "&:hover": {
+      backgroundColor: "#eee",
+      borderColor: "#eee",
+      color: "#333",
+    },
   },
   circularProgress: {
     display: "block",
@@ -54,6 +61,9 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
   const [status, setStatus] = useState(["sale", "siring", "none"])
   const [sortBy, setSortBy] = useState("Type")
   const [sortDirection, setSortDirection] = useState("ASC")
+  const [limit, setLimit] = useState(25)
+  const dragons = useSelector(({ dragons }) => dragons)
+  const dragonsQuery = useSelector(({ dragonsQuery }) => dragonsQuery)
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
@@ -66,6 +76,8 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
       typeFilter: typeFilter.join("%2C"),
       status: status.join("%2C"),
       sortDirection,
+      page: 1,
+      limit,
       from: 0,
       showBlacklisted: true,
       isMock: false,
@@ -76,12 +88,44 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
         if (!data.error) {
           console.log("[SUCCESS]: ", data.message)
 
-          dispatch(dragonsQueryActions.set(query))
+          dispatch(
+            dragonsQueryActions.set({
+              ...query,
+              totalItems: data.data.totalItems,
+            })
+          )
           setError("")
         } else {
           console.log("[FAIL]: ", data.message)
 
           setError(data.message)
+        }
+
+        setProcessing(false)
+      })
+      .catch((e) => {
+        console.log("[ERROR]: ", e)
+
+        setProcessing(false)
+      })
+  }
+
+  const handleLoadMore = () => {
+    setProcessing(true)
+
+    const oldPage = dragonsQuery.page
+    const from = dragonsQuery.limit * oldPage
+    const page = oldPage + 1
+    const query = { ...dragonsQuery, from, page }
+
+    dispatch(getDragons(query, true))
+      .then((data) => {
+        if (!data.error) {
+          console.log("[SUCCESS]: ", data.message)
+
+          dispatch(dragonsQueryActions.set(query))
+        } else {
+          console.log("[FAIL]: ", data.message)
         }
 
         setProcessing(false)
@@ -101,9 +145,11 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
           setSortBy={setSortBy}
           sortDirection={sortDirection}
           setSortDirection={setSortDirection}
+          setLimit={setLimit}
         />
         <TypeToggle typeFilter={typeFilter} setTypeFilter={setTypeFilter} />
         <StatusToggle status={status} setStatus={setStatus} />
+        <LimitSelect limit={limit} setLimit={setLimit} />
       </OptionsContainer>
 
       <Button
@@ -118,6 +164,26 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
           "Search"
         )}
       </Button>
+
+      {dragons.length > 0 &&
+        Object.keys(dragonsQuery).length > 0 &&
+        dragons.length < dragonsQuery.totalItems && (
+          <Button
+            fullWidth
+            variant="outlined"
+            sx={styles.loadMoreButton}
+            disabled={processing}
+            onClick={handleLoadMore}>
+            {processing ? (
+              <CircularProgress
+                color="secondary"
+                sx={styles.circularProgress}
+              />
+            ) : (
+              `Load ${dragonsQuery.limit} More`
+            )}
+          </Button>
+        )}
     </Form>
   )
 }
