@@ -51,6 +51,7 @@ export const getDragons = (params, loadMore) => {
             error: false,
             code: responseCode,
             message: "Successfully retrieved dragons!",
+            data,
           }
         }
 

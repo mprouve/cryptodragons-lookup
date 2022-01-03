@@ -49,6 +49,7 @@ export const getEggs = (params, loadMore) => {
             error: false,
             code: responseCode,
             message: "Successfully retrieved eggs!",
+            data,
           }
         }
 

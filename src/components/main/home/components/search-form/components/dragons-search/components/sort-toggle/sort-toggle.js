@@ -8,7 +8,7 @@ const styles = {
     textTransform: "none",
     minHeight: "2.7rem",
     height: "2.7rem",
-    minWidth: 'auto',
+    minWidth: "auto",
     width: "16.75%",
     padding: "10px",
     fontSize: ".9rem",
@@ -71,7 +71,13 @@ const styles = {
   },
 }
 
-const SortToggle = ({ sortBy, setSortBy, sortDirection, setSortDirection }) => {
+const SortToggle = ({
+  sortBy,
+  setSortBy,
+  sortDirection,
+  setSortDirection,
+  setLimit,
+}) => {
   const sortStyling = sortDirection === "ASC" ? styles.sortAsc : styles.sortDesc
 
   const handleClick = (sort) => {
@@ -82,6 +88,16 @@ const SortToggle = ({ sortBy, setSortBy, sortDirection, setSortDirection }) => {
         setSortDirection("ASC")
       }
     } else {
+      if (
+        sort === "strength" ||
+        sort === "fifteens" ||
+        sort === "totalTraits"
+      ) {
+        setLimit(200)
+      } else {
+        setLimit(25)
+      }
+
       setSortBy(sort)
       setSortDirection("ASC")
     }

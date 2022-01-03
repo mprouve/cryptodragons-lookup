@@ -40,6 +40,7 @@ export const getEgg = (params) => {
             error: false,
             code: responseCode,
             message: "Successfully retrieved egg!",
+            data,
           }
         }
 

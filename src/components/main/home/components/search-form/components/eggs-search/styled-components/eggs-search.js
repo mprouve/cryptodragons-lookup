@@ -6,7 +6,8 @@ export const Form = styled.form`
 `
 
 export const OptionsContainer = styled.div`
-  & > div:nth-child(1) {
+  & > div {
     display: block;
+    margin-top: 1rem;
   }
 `
