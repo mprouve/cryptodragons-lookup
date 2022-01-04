@@ -1,4 +1,5 @@
 import React from 'react'
+import Traits from './components/traits/traits.js'
 import IconButton from '@mui/material/IconButton'
 import {
   MainContainer,
@@ -49,7 +50,8 @@ const Dragon = ({ dragon }) => {
     battleWinsAmount,
     status,
     ownerId,
-    secretGene
+    secretGene,
+    genome
   } = dragon
 
   const getTypeColor = () => {
@@ -211,18 +213,9 @@ const Dragon = ({ dragon }) => {
             <StatValue>{status}</StatValue>
           </StatContent>
         </Stat>
-
-        {/* <Stat>
-          <StatIconContainer>
-            <span className="material-icons">lock</span>
-          </StatIconContainer>
-
-          <StatContent>
-            <StatLabel>Locked</StatLabel>
-            <StatValue>{isLocked ? "Yes" : "No"}</StatValue>
-          </StatContent>
-        </Stat> */}
       </StatsContainer>
+
+      <Traits genome={genome} />
     </MainContainer>
   )
 }
