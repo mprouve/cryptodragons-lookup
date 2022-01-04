@@ -45,8 +45,6 @@ const Home = () => {
     return egg.isHatched
   })
 
-  console.log({ dragonsQuery, eggsQuery })
-
   return (
     <MainContainer>
       <BannerOuterContainer>
@@ -62,9 +60,14 @@ const Home = () => {
             's Google Chrome Extension?
           </BannerText>
 
-          <Button color="secondary" variant="outlined" sx={styles.chromeButton}>
-            Chrome Extension
-          </Button>
+          <a
+            href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
+            target="_blank"
+            rel="noreferrer">
+            <Button color="secondary" variant="outlined" sx={styles.chromeButton}>
+              Chrome Extension
+            </Button>
+          </a>
         </BannerInnerContainer>
       </BannerOuterContainer>
 
