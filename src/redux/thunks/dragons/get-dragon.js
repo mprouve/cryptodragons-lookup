@@ -1,6 +1,7 @@
 import config from "../../../config.js"
 import { toasterActions } from "../../action-creators/toaster.js"
 import { dragonsActions } from "../../action-creators/dragons.js"
+import { eggsActions } from "../../action-creators/eggs.js"
 
 /*
  * METHOD TO GET DRAGON BY ID
@@ -34,6 +35,7 @@ export const getDragon = (params) => {
 
         if (responseCode === 200) {
           dispatch(toasterActions.set("Successfully retrieved dragon!"))
+          dispatch(eggsActions.clear())
           dispatch(dragonsActions.set([data.result]))
 
           return {

@@ -1,28 +1,29 @@
-import config from "../../../config.js"
-import { toasterActions } from "../../action-creators/toaster.js"
-import { eggsActions } from "../../action-creators/eggs.js"
+import config from '../../../config.js'
+import { toasterActions } from '../../action-creators/toaster.js'
+import { dragonsActions } from '../../action-creators/dragons.js'
+import { eggsActions } from '../../action-creators/eggs.js'
 
 /*
  * METHOD TO GET EGG BY ID
  */
 export const getEgg = (params) => {
-  let responseCode = ""
-  const method = "GET"
+  let responseCode = ''
+  const method = 'GET'
   const url = `${config.api}/egg/${params.eggId}`
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json'
   }
 
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
   return (dispatch) => {
-    console.log("Sending get egg by ID request to CryptoDragons")
+    console.log('Sending get egg by ID request to CryptoDragons')
 
     // Return the fetch so react components calling 'store.dispatch()' can use 'then()'
     return fetch(url, {
       method,
-      headers,
+      headers
     })
       .then((response) => {
         responseCode = response.status
@@ -33,21 +34,22 @@ export const getEgg = (params) => {
         console.log({ data })
 
         if (responseCode === 200) {
-          dispatch(toasterActions.set("Successfully retrieved egg!"))
+          dispatch(toasterActions.set('Successfully retrieved egg!'))
+          dispatch(dragonsActions.clear())
           dispatch(eggsActions.set([data.result]))
 
           return {
             error: false,
             code: responseCode,
-            message: "Successfully retrieved egg!",
-            data,
+            message: 'Successfully retrieved egg!',
+            data
           }
         }
 
         dispatch(
           toasterActions.set(
             responseCode === 404
-              ? "Egg not found."
+              ? 'Egg not found.'
               : "Something wen't wrong. Please try again later"
           )
         )
@@ -57,8 +59,8 @@ export const getEgg = (params) => {
           code: responseCode,
           message:
             responseCode === 404
-              ? "Egg not found."
-              : "Something wen't wrong. Please try again later",
+              ? 'Egg not found.'
+              : "Something wen't wrong. Please try again later"
         }
       })
       .catch((error) => {
@@ -66,8 +68,8 @@ export const getEgg = (params) => {
 
         return {
           error: true,
-          code: "",
-          message: "Something wen't wrong. Please try again later",
+          code: '',
+          message: "Something wen't wrong. Please try again later"
         }
       })
   }
