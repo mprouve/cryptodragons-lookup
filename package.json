@@ -24,7 +24,6 @@
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.2"
   },
-  "devDependencies": {},
   "scripts": {
     "dev": "npm run start",
     "start": "react-scripts start",
