@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import theme from "../../../../../../res/theme.js"
+import styled from 'styled-components'
+import theme from '../../../../../../res/theme.js'
 
 export const MainContainer = styled.div`
   position: relative;
@@ -34,6 +34,7 @@ export const FloatingMeta = styled.div`
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
+  z-index: 1;
 
   & > span {
     display: inline-block;
@@ -62,10 +63,20 @@ export const FloatingMeta = styled.div`
   }
 `
 
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+`
+
 export const Image = styled.img`
   display: block;
   width: 100%;
-  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 `
 
 export const ID = styled.p`
@@ -80,7 +91,7 @@ export const Name = styled.p`
   font-size: ${theme.typography.fontSizes.extraLarge};
   font-weight: ${theme.typography.fontWeight.regular};
   color: ${theme.typography.fontColor.general};
-  ${"" /* word-wrap: break-word; */}
+  ${'' /* word-wrap: break-word; */}
   text-overflow: ellipsis;
 
   /* Needed to make it work */

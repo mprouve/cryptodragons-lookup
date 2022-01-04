@@ -1,41 +1,41 @@
-import React from "react"
-import ScrollToTop from "./components/scroll-to-top/scroll-to-top.js"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import Menu from "@mui/material/Menu"
-import MenuIcon from "@mui/icons-material/Menu"
-import Container from "@mui/material/Container"
+import React from 'react'
+import ScrollToTop from './components/scroll-to-top/scroll-to-top.js'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Menu from '@mui/material/Menu'
+import MenuIcon from '@mui/icons-material/Menu'
+import Container from '@mui/material/Container'
 // import Avatar from "@mui/material/Avatar"
 // import Button from "@mui/material/Button"
 // import Tooltip from "@mui/material/Tooltip"
-import MenuItem from "@mui/material/MenuItem"
-import Fab from "@mui/material/Fab"
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import MenuItem from '@mui/material/MenuItem'
+import Fab from '@mui/material/Fab'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 // const settings = ["Profile", "Account", "Dashboard", "Logout"]
 
 const styles = {
   menuItem: {
-    padding: ".5rem 1rem",
-    "& .material-icons": {
-      marginTop: ".2rem",
-      marginRight: "1rem",
-      fontSize: "1.3rem",
-    },
+    padding: '.5rem 1rem',
+    '& .material-icons': {
+      marginTop: '.2rem',
+      marginRight: '1rem',
+      fontSize: '1.3rem'
+    }
   },
   typography: {
-    lineHeight: "1rem",
-    fontSize: "1rem",
-  },
+    lineHeight: '1rem',
+    fontSize: '1rem'
+  }
 }
 
 const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   // const [anchorElUser, setAnchorElUser] = React.useState(null)
-  const HeaderTitle = "CryptoDragons Enhanced Lookup"
+  const HeaderTitle = 'CryptoDragons Enhanced Lookup'
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -56,20 +56,23 @@ const Header = (props) => {
   return (
     <AppBar position="fixed" color="default">
       <Container maxWidth={false}>
-        <Toolbar disableGutters sx={{ minHeight: "4rem" }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              marginBottom: ".2rem",
-            }}>
-            {HeaderTitle}
-          </Typography>
+        <Toolbar disableGutters sx={{ minHeight: '4rem' }}>
+          <a href="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                marginBottom: '.2rem',
+                cursor: 'pointer'
+              }}>
+              {HeaderTitle}
+            </Typography>
+          </a>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             {/* <IconButton
               size="large"
               aria-label="account of current user"
@@ -112,13 +115,13 @@ const Header = (props) => {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              marginBottom: ".2rem",
+              display: { xs: 'flex', md: 'none' },
+              marginBottom: '.2rem'
             }}>
             {HeaderTitle}
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {/* {pages.map((page) => (
               <Button
                 key={page}
@@ -164,7 +167,7 @@ const Header = (props) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              sx={{ marginLeft: "-.7rem" }}>
+              sx={{ marginLeft: '-.7rem' }}>
               <MenuIcon />
             </IconButton>
 
@@ -172,19 +175,28 @@ const Header = (props) => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left'
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left'
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block" },
+                display: { xs: 'block' }
               }}>
+              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                <span className="material-icons">home</span>
+                <a href="/">
+                  <Typography textAlign="center" sx={styles.typography}>
+                    Home
+                  </Typography>
+                </a>
+              </MenuItem>
+
               <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
                 <span className="material-icons">extension</span>
                 <a
@@ -224,7 +236,7 @@ const Header = (props) => {
 
       <ScrollToTop {...props}>
         <Fab color="primary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon sx={{ color: "#fff" }} />
+          <KeyboardArrowUpIcon sx={{ color: '#fff' }} />
         </Fab>
       </ScrollToTop>
     </AppBar>

@@ -1,14 +1,13 @@
-import some from "lodash/some"
-import { dragonsActionTypes } from "../action-creators/dragons.js"
-import getTierAndStrength from "../../utils/functions/get-tier-and-strength.js"
-import getTraitsMeta from "../../utils/functions/get-traits-meta.js"
+import some from 'lodash/some'
+import { dragonsActionTypes } from '../action-creators/dragons.js'
+import getTraitsMeta from '../../utils/functions/get-traits-meta.js'
 
 // Add enhanced metadata to dragon objects
 // strength, tier #, etc...
 const getEnhancedDragon = (dragon) => {
   const { type, genome, motherId, fatherId } = dragon
-  const { tier, strength } = getTierAndStrength(type, genome)
-  const { totalTraits, fifteens } = getTraitsMeta(genome)
+  const { tier, strength, totalTraits, tenToFourteens, fifteens, percent, secretGene } =
+    getTraitsMeta(type, genome)
 
   return {
     ...dragon,
@@ -19,8 +18,11 @@ const getEnhancedDragon = (dragon) => {
     tier,
     strength,
     totalTraits,
+    tenToFourteens,
     fifteens,
-    firstborn: !motherId && !fatherId,
+    percent,
+    secretGene,
+    firstborn: !motherId && !fatherId
   }
 }
 
@@ -32,7 +34,7 @@ const copyDragons = (dragons) => {
       mother: {},
       owner: {},
       priceSettings: {},
-      genome: [...dragon.genome],
+      genome: [...dragon.genome]
     }
   })
 }

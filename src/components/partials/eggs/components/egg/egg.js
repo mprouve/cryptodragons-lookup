@@ -1,47 +1,36 @@
-import React from "react"
-import IconButton from "@mui/material/IconButton"
+import React from 'react'
+import IconButton from '@mui/material/IconButton'
 // import filter from "lodash/filter"
 import {
   MainContainer,
+  ImageContainer,
   FloatingMeta,
   Image,
   Name,
   ID,
-  // TypeContainer,
-  // TypeText,
-  // Tier,
   Separator,
   StatsContainer,
   Stat,
   StatIconContainer,
   StatContent,
   StatLabel,
-  StatValue,
-} from "./styled-components/egg.js"
+  StatValue
+} from './styled-components/egg.js'
 
 const styles = {
   link: {
-    position: "absolute",
-    top: ".5rem",
-    right: ".5rem",
-  },
+    position: 'absolute',
+    top: '.5rem',
+    zIndex: '1'
+  }
 }
 
 const Egg = ({ egg }) => {
-  const {
-    id,
-    price,
-    name,
-    isHatched,
-    dragonId,
-    type,
-    status,
-    imageURL,
-  } = egg
+  const { id, price, name, isHatched, dragonId, type, status, imageURL, ownerId } = egg
 
   return (
     <MainContainer>
-      {price !== "0" && (
+      {price !== '0' && (
         <FloatingMeta>
           {/* <span className="material-icons">favorite</span>
         <span
@@ -54,16 +43,21 @@ const Egg = ({ egg }) => {
         </FloatingMeta>
       )}
 
-      <a
-        href={`https://cryptodragons.com/egg/${id}`}
-        target="_blank"
-        rel="noreferrer">
-        <IconButton sx={styles.link}>
+      <a href={`https://cryptodragons.com/egg/${id}`} target="_blank" rel="noreferrer">
+        <IconButton sx={{ ...styles.link, right: '.5rem' }}>
           <span className="material-icons">launch</span>
         </IconButton>
       </a>
 
-      <Image src={imageURL} alt={`CryptoDragon image for egg #${id}`} />
+      <a href={`/user/${ownerId}`} target="_blank" rel="noreferrer">
+        <IconButton sx={{ ...styles.link, right: '3rem' }}>
+          <span className="material-icons">person_search</span>
+        </IconButton>
+      </a>
+
+      <ImageContainer>
+        <Image src={imageURL} alt={`CryptoDragon image for egg #${id}`} loading="lazy" />
+      </ImageContainer>
 
       <ID>{`#${id}`}</ID>
       <Name>{name}</Name>
@@ -78,7 +72,7 @@ const Egg = ({ egg }) => {
 
           <StatContent>
             <StatLabel>Hatched</StatLabel>
-            <StatValue>{isHatched ? "Yes" : "No"}</StatValue>
+            <StatValue>{isHatched ? 'Yes' : 'No'}</StatValue>
           </StatContent>
         </Stat>
 
@@ -100,7 +94,7 @@ const Egg = ({ egg }) => {
 
           <StatContent>
             <StatLabel>Dragon ID</StatLabel>
-            <StatValue>{dragonId || "N/A"}</StatValue>
+            <StatValue>{dragonId || 'N/A'}</StatValue>
           </StatContent>
         </Stat>
 
