@@ -1,39 +1,41 @@
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getEggs } from "../../../../../../../redux/thunks/eggs/get-eggs.js"
-import { eggsQueryActions } from "../../../../../../../redux/action-creators/eggs-query.js"
-import HatchedToggle from "./components/hatched-toggle/hatched-toggle.js"
-import LimitSelect from "../../../../../../partials/limit-select/limit-select.js"
-import Button from "@mui/material/Button"
-import CircularProgress from "@mui/material/CircularProgress"
-import { Form, OptionsContainer } from "./styled-components/eggs-search.js"
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEggs } from '../../../../../../../redux/thunks/eggs/get-eggs.js'
+import { dragonsQueryActions } from '../../../../../../../redux/action-creators/dragons-query.js'
+import { eggsQueryActions } from '../../../../../../../redux/action-creators/eggs-query.js'
+import { dragonsActions } from '../../../../../../../redux/action-creators/dragons.js'
+import HatchedToggle from './components/hatched-toggle/hatched-toggle.js'
+import LimitSelect from '../../../../../../partials/limit-select/limit-select.js'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import { Form, OptionsContainer } from './styled-components/eggs-search.js'
 
 const styles = {
   button: {
-    display: "block",
-    width: "100%",
-    height: "2.7rem",
-    marginTop: "1rem",
+    display: 'block',
+    width: '100%',
+    height: '2.7rem',
+    marginTop: '1rem'
   },
   loadMoreButton: {
-    marginTop: "1rem",
-    color: "#eee",
-    borderColor: "#eee",
-    "&:hover": {
-      backgroundColor: "#eee",
-      borderColor: "#eee",
-      color: "#333",
-    },
+    marginTop: '1rem',
+    color: '#eee',
+    borderColor: '#eee',
+    '&:hover': {
+      backgroundColor: '#eee',
+      borderColor: '#eee',
+      color: '#333'
+    }
   },
   circularProgress: {
-    display: "block",
-    width: "17px !important",
-    height: "17px !important",
-    margin: ".1rem auto 0 auto",
-    "& svg": {
-      color: "white",
-    },
-  },
+    display: 'block',
+    width: '17px !important',
+    height: '17px !important',
+    margin: '.1rem auto 0 auto',
+    '& svg': {
+      color: 'white'
+    }
+  }
 }
 
 const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
@@ -54,26 +56,26 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
       limit,
       from: 0,
       isMock: false,
-      showBlacklisted: true,
+      showBlacklisted: true
     }
 
     dispatch(getEggs(query, false))
       .then((data) => {
         if (!data.error) {
-          console.log("[SUCCESS]: ", data.message)
+          console.log('[SUCCESS]: ', data.message)
 
           if (isHatched) {
-            setTab("eggshells")
+            setTab('eggshells')
           } else {
-            setTab("eggs")
+            setTab('eggs')
           }
 
-          dispatch(
-            eggsQueryActions.set({ ...query, totalItems: data.data.totalItems })
-          )
-          setError("")
+          dispatch(eggsQueryActions.set({ ...query, totalItems: data.data.totalItems }))
+          dispatch(dragonsQueryActions.clear())
+          dispatch(dragonsActions.clear())
+          setError('')
         } else {
-          console.log("[FAIL]: ", data.message)
+          console.log('[FAIL]: ', data.message)
 
           setError(data.message)
         }
@@ -81,7 +83,7 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
         setProcessing(false)
       })
       .catch((e) => {
-        console.log("[ERROR]: ", e)
+        console.log('[ERROR]: ', e)
 
         setProcessing(false)
       })
@@ -98,17 +100,17 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
     dispatch(getEggs(query, true))
       .then((data) => {
         if (!data.error) {
-          console.log("[SUCCESS]: ", data.message)
+          console.log('[SUCCESS]: ', data.message)
 
           dispatch(eggsQueryActions.set(query))
         } else {
-          console.log("[FAIL]: ", data.message)
+          console.log('[FAIL]: ', data.message)
         }
 
         setProcessing(false)
       })
       .catch((e) => {
-        console.log("[ERROR]: ", e)
+        console.log('[ERROR]: ', e)
 
         setProcessing(false)
       })
@@ -130,29 +132,24 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
         {processing ? (
           <CircularProgress color="secondary" sx={styles.circularProgress} />
         ) : (
-          "Search"
+          'Search'
         )}
       </Button>
 
-      {eggs.length > 0 &&
-        Object.keys(eggsQuery).length > 0 &&
-        eggs.length < eggsQuery.totalItems && (
-          <Button
-            fullWidth
-            variant="outlined"
-            sx={styles.loadMoreButton}
-            disabled={processing}
-            onClick={handleLoadMore}>
-            {processing ? (
-              <CircularProgress
-                color="secondary"
-                sx={styles.circularProgress}
-              />
-            ) : (
-              `Load ${eggsQuery.limit} More`
-            )}
-          </Button>
-        )}
+      {eggs.length > 0 && Object.keys(eggsQuery).length > 0 && eggs.length < eggsQuery.totalItems && (
+        <Button
+          fullWidth
+          variant="outlined"
+          sx={styles.loadMoreButton}
+          disabled={processing}
+          onClick={handleLoadMore}>
+          {processing ? (
+            <CircularProgress color="secondary" sx={styles.circularProgress} />
+          ) : (
+            `Load ${eggsQuery.limit} More`
+          )}
+        </Button>
+      )}
     </Form>
   )
 }

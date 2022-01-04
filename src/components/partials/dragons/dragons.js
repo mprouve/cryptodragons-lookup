@@ -1,47 +1,35 @@
-import React, { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getDragons } from "../../../redux/thunks/dragons/get-dragons.js"
-import { dragonsQueryActions } from "../../../redux/action-creators/dragons-query.js"
-import Dragon from "./components/dragon/dragon.js"
-import nestedSort from "../../../utils/functions/nested-sort.js"
-import Button from "@mui/material/Button"
-import CircularProgress from "@mui/material/CircularProgress"
-import { MainContainer, NoResults } from "./styled-components/dragons.js"
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getDragons } from '../../../redux/thunks/dragons/get-dragons.js'
+import { dragonsQueryActions } from '../../../redux/action-creators/dragons-query.js'
+import Dragon from './components/dragon/dragon.js'
+import nestedSort from '../../../utils/functions/nested-sort.js'
+import arrayToCSV from '../../../utils/functions/array-to-csv.js'
+import exportCSV from '../../../utils/functions/export-csv.js'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import { MainContainer, NoResults } from './styled-components/dragons.js'
 
 const getSortedDragons = (dragons, query) => {
-  const sortDirection = query.sortDirection === "DESC" ? -1 : 1
+  const sortDirection = query.sortDirection === 'DESC' ? -1 : 1
 
-  if (query.customSort === "strength") {
-    return nestedSort(dragons, sortDirection, "strength")
-  } else if (query.customSort === "fifteens") {
-    return nestedSort(dragons, sortDirection, "fifteens")
-  } else if (query.customSort === "totalTraits") {
-    return nestedSort(dragons, sortDirection, "totalTraits")
+  if (query.customSort) {
+    return nestedSort(dragons, sortDirection, query.customSort)
   } else {
     return dragons
   }
 }
 
 const styles = {
-  // topLoadButton: {
-  //   display: "block",
-  //   width: "10rem",
-  //   minHeight: "2.3rem",
-  //   height: "2.3rem",
-  //   lineHeight: ".8rem",
-  //   position: "absolute",
-  //   bottom: "0rem",
-  //   right: "0rem",
-  // },
   circularProgress: {
-    display: "block",
-    width: "17px !important",
-    height: "17px !important",
-    margin: ".1rem auto 0 auto",
-    "& svg": {
-      color: "#333",
-    },
-  },
+    display: 'block',
+    width: '17px !important',
+    height: '17px !important',
+    margin: '.1rem auto 0 auto',
+    '& svg': {
+      color: '#333'
+    }
+  }
 }
 
 const Dragons = ({ dragons }) => {
@@ -61,36 +49,47 @@ const Dragons = ({ dragons }) => {
     dispatch(getDragons(query, true))
       .then((data) => {
         if (!data.error) {
-          console.log("[SUCCESS]: ", data.message)
+          console.log('[SUCCESS]: ', data.message)
 
           dispatch(dragonsQueryActions.set(query))
         } else {
-          console.log("[FAIL]: ", data.message)
+          console.log('[FAIL]: ', data.message)
         }
 
         setProcessing(false)
       })
       .catch((e) => {
-        console.log("[ERROR]: ", e)
+        console.log('[ERROR]: ', e)
 
         setProcessing(false)
       })
   }
 
+  const handleExport = () => {
+    const csv = arrayToCSV(dragons)
+
+    exportCSV(csv, 'dragons.csv', document)
+  }
+
   return (
     <MainContainer>
-      {/* <Button
-        variant="outlined"
-        color="secondary"
-        sx={styles.topLoadButton}
-        onClick={handleLoadMore}
-        disabled={processing}>
-        {processing ? (
-          <CircularProgress color="secondary" sx={styles.circularProgress} />
-        ) : (
-          `Load ${dragonsQuery.limit} More`
-        )}
-      </Button> */}
+      {sortedDragons.length > 0 && (
+        <div>
+          <Button
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            sx={{ maxWidth: '20rem', margin: '0.5rem auto' }}
+            onClick={handleExport}
+            disabled={processing}>
+            {processing ? (
+              <CircularProgress color="secondary" sx={styles.circularProgress} />
+            ) : (
+              'Export to CSV'
+            )}
+          </Button>
+        </div>
+      )}
 
       {sortedDragons.length &&
         sortedDragons.map((dragon) => {
@@ -105,28 +104,23 @@ const Dragons = ({ dragons }) => {
         </NoResults>
       )}
 
-      {sortedDragons.length > 0 &&
-        Object.keys(dragonsQuery).length > 0 &&
-        dragonsQuery.limit > 0 && (
-          <div>
-            <Button
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              sx={{ maxWidth: "50rem", marginTop: "3rem" }}
-              onClick={handleLoadMore}
-              disabled={processing}>
-              {processing ? (
-                <CircularProgress
-                  color="secondary"
-                  sx={styles.circularProgress}
-                />
-              ) : (
-                `Load ${dragonsQuery.limit} More`
-              )}
-            </Button>
-          </div>
-        )}
+      {sortedDragons.length > 0 && Object.keys(dragonsQuery).length > 0 && dragonsQuery.limit > 0 && (
+        <div>
+          <Button
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            sx={{ maxWidth: '50rem', marginTop: '3rem' }}
+            onClick={handleLoadMore}
+            disabled={processing}>
+            {processing ? (
+              <CircularProgress color="secondary" sx={styles.circularProgress} />
+            ) : (
+              `Load ${dragonsQuery.limit} More`
+            )}
+          </Button>
+        </div>
+      )}
     </MainContainer>
   )
 }
