@@ -49,7 +49,7 @@ const getTraitsMeta = (type, genome) => {
 
       meta.strength += trait * 3 * geneNum
     } else if (geneNum === 25) {
-      if (type === 'Legendary' && trait > 0) {
+      if ((type === 'Epic' || type === 'Legendary') && trait > 0) {
         meta.tier += 1
       }
 
