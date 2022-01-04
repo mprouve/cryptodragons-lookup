@@ -188,47 +188,47 @@ const Header = (props) => {
               sx={{
                 display: { xs: 'block' }
               }}>
-              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
-                <span className="material-icons">home</span>
-                <a href="/">
+              <a href="/">
+                <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                  <span className="material-icons">home</span>
                   <Typography textAlign="center" sx={styles.typography}>
                     Home
                   </Typography>
-                </a>
-              </MenuItem>
+                </MenuItem>
+              </a>
 
-              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
-                <span className="material-icons">extension</span>
-                <a
-                  href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
-                  target="_blank"
-                  rel="noreferrer">
+              <a
+                href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
+                target="_blank"
+                rel="noreferrer">
+                <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                  <span className="material-icons">extension</span>
                   <Typography textAlign="center" sx={styles.typography}>
                     Chrome Extension
                   </Typography>
-                </a>
-              </MenuItem>
+                </MenuItem>
+              </a>
 
-              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
-                <span className="material-icons">article</span>
-                <a
-                  href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer">
+              <a
+                href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
+                target="_blank"
+                rel="noreferrer">
+                <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                  <span className="material-icons">article</span>
                   <Typography textAlign="center" sx={styles.typography}>
                     Breeding Guide
                   </Typography>
-                </a>
-              </MenuItem>
+                </MenuItem>
+              </a>
 
-              <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
-                <span className="material-icons">contact_support</span>
-                <a href="mailto:marcoprouve@gmail.com">
+              <a href="mailto:marcoprouve@gmail.com">
+                <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
+                  <span className="material-icons">contact_support</span>
                   <Typography textAlign="center" sx={styles.typography}>
                     Contact Support
                   </Typography>
-                </a>
-              </MenuItem>
+                </MenuItem>
+              </a>
             </Menu>
           </Box>
         </Toolbar>
