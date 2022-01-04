@@ -3,7 +3,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import ReactGA from 'react-ga'
 import { ThemeProvider } from '@mui/material/styles'
 import './index.css'
 import config from './config.js'
@@ -16,8 +15,6 @@ import reportWebVitals from './reportWebVitals'
 config.debug && console.log('[REACT_ENVIRONMENT]: ', process.env.REACT_APP_NODE_ENV)
 config.debug && console.log('[ENVIRONMENT]: ', process.env.NODE_ENV)
 config.debug && console.log('[REDUX STORE]: ', store.getState())
-
-ReactGA.initialize('G-2TENCMP8FR')
 
 ReactDOM.render(
   <Provider store={store}>
