@@ -33,6 +33,8 @@ const styles = {
 const Dragon = ({ dragon }) => {
   const {
     id,
+    mother,
+    father,
     likes,
     price,
     isBlacklisted,
@@ -51,11 +53,15 @@ const Dragon = ({ dragon }) => {
     status,
     ownerId,
     secretGene,
-    genome
+    genome,
+    motherType,
+    motherTier,
+    fatherType,
+    fatherTier
   } = dragon
 
-  const getTypeColor = () => {
-    switch (dragon.type) {
+  const getTypeColor = (type) => {
+    switch (type) {
       case 'Common':
         return '#999'
       case 'Rare':
@@ -107,11 +113,11 @@ const Dragon = ({ dragon }) => {
 
       <BadgeContainer>
         <TypeContainer
-          color={getTypeColor()}
+          color={getTypeColor(type)}
           style={type === 'Common' ? { padding: '0.5rem 0.5rem 0.5rem 0.5rem' } : {}}>
           <TypeText>{type}</TypeText>
 
-          {type !== 'Common' && <Tier color={getTypeColor()}>{tier}</Tier>}
+          {type !== 'Common' && <Tier color={getTypeColor(type)}>{tier}</Tier>}
         </TypeContainer>
 
         <Badge show={isBlacklisted} backgroundColor={'#333'}>
@@ -211,6 +217,78 @@ const Dragon = ({ dragon }) => {
           <StatContent>
             <StatLabel>Status</StatLabel>
             <StatValue>{status}</StatValue>
+          </StatContent>
+        </Stat>
+
+        <Stat>
+          <StatIconContainer>
+            <span className="material-icons">male</span>
+          </StatIconContainer>
+
+          <StatContent>
+            <StatLabel>Father</StatLabel>
+
+            {father && (
+              <StatValue>
+                <a href={`/dragon/${father.id}`} target="_blank" rel="noreferrer">
+                  #{father.id}
+                </a>
+              </StatValue>
+            )}
+
+            {fatherType ? (
+              <TypeContainer
+                color={getTypeColor(fatherType)}
+                style={
+                  fatherType === 'Common'
+                    ? { padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }
+                    : { marginTop: '.4rem' }
+                }>
+                <TypeText>{fatherType}</TypeText>
+
+                {fatherType !== 'Common' && (
+                  <Tier color={getTypeColor(fatherType)}>{fatherTier}</Tier>
+                )}
+              </TypeContainer>
+            ) : (
+              <StatValue>None</StatValue>
+            )}
+          </StatContent>
+        </Stat>
+
+        <Stat>
+          <StatIconContainer>
+            <span className="material-icons">female</span>
+          </StatIconContainer>
+
+          <StatContent>
+            <StatLabel>Mother</StatLabel>
+
+            {mother && (
+              <StatValue>
+                <a href={`/dragon/${mother.id}`} target="_blank" rel="noreferrer">
+                  #{mother.id}
+                </a>
+              </StatValue>
+            )}
+
+            {mother ? (
+              <TypeContainer
+                color={getTypeColor(motherType)}
+                style={
+                  motherType === 'Common'
+                    ? { padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }
+                    : { marginTop: '.4rem' }
+                }>
+                <TypeText>{motherType}</TypeText>
+
+                {motherType !== 'Common' && (
+                  <Tier color={getTypeColor(motherType)}>{motherTier}</Tier>
+                )}
+              </TypeContainer>
+            ) : (
+              <StatValue>None</StatValue>
+            )}
           </StatContent>
         </Stat>
       </StatsContainer>

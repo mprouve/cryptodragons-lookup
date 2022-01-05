@@ -7,6 +7,7 @@ export const MainContainer = styled.div`
   width: 30%;
   margin: 1rem 1.5%;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  vertical-align: top;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 1rem;
@@ -194,4 +195,19 @@ export const StatValue = styled.p`
   line-height: 1.2rem;
   color: ${theme.typography.fontColor.general};
   text-transform: capitalize;
+
+  & > a {
+    color: ${theme.palette.link.primary};
+
+    &:link,
+    &:visited,
+    &:active {
+      text-decoration: none;
+      color: ${theme.palette.link.primary};
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
