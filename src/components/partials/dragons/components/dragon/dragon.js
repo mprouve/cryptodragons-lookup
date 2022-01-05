@@ -55,9 +55,9 @@ const Dragon = ({ dragon }) => {
     secretGene,
     genome,
     motherType,
-    motherTier,
+    // motherTier,
     fatherType,
-    fatherTier
+    // fatherTier
   } = dragon
 
   const getTypeColor = (type) => {
@@ -239,16 +239,12 @@ const Dragon = ({ dragon }) => {
             {fatherType ? (
               <TypeContainer
                 color={getTypeColor(fatherType)}
-                style={
-                  fatherType === 'Common'
-                    ? { padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }
-                    : { marginTop: '.4rem' }
-                }>
+                style={{ padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }}>
                 <TypeText>{fatherType}</TypeText>
 
-                {fatherType !== 'Common' && (
+                {/* {fatherType !== 'Common' && (
                   <Tier color={getTypeColor(fatherType)}>{fatherTier}</Tier>
-                )}
+                )} */}
               </TypeContainer>
             ) : (
               <StatValue>None</StatValue>
@@ -275,16 +271,12 @@ const Dragon = ({ dragon }) => {
             {mother ? (
               <TypeContainer
                 color={getTypeColor(motherType)}
-                style={
-                  motherType === 'Common'
-                    ? { padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }
-                    : { marginTop: '.4rem' }
-                }>
+                style={{ padding: '0.5rem 0.5rem 0.5rem 0.5rem', marginTop: '.4rem' }}>
                 <TypeText>{motherType}</TypeText>
 
-                {motherType !== 'Common' && (
+                {/* {motherType !== 'Common' && (
                   <Tier color={getTypeColor(motherType)}>{motherTier}</Tier>
-                )}
+                )} */}
               </TypeContainer>
             ) : (
               <StatValue>None</StatValue>
