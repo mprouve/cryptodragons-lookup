@@ -48,6 +48,7 @@ const styles = {
     marginRight: "-1px",
   },
   buttonRightCenter: {
+    // marginLeft: "-1px",
     marginRight: "-1px",
   },
   buttonRight: {
