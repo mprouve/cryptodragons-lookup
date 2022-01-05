@@ -10,13 +10,15 @@ const getEnhancedDragon = (dragon) => {
   const fatherExists = mother && Object.keys(mother).length > 0
   const { tier, strength, totalTraits, tenToFourteens, fifteens, percent, secretGene } =
     getTraitsMeta(type, genome)
-  const motherInfo = motherExists ? getTraitsMeta(mother.type, mother.genome) : null
-  const fatherInfo = fatherExists ? getTraitsMeta(father.type, father.genome) : null
+  // const motherInfo = motherExists ? getTraitsMeta(mother.type, mother.genome) : null
+  // const fatherInfo = fatherExists ? getTraitsMeta(father.type, father.genome) : null
 
   return {
     ...dragon,
-    father: fatherExists ? { ...father, genome: [...father.genome] } : null,
-    mother: motherExists ? { ...mother, genome: [...mother.genome] } : null,
+    father,
+    mother,
+    // father: fatherExists ? { ...father, genome: [...father.genome] } : null,
+    // mother: motherExists ? { ...mother, genome: [...mother.genome] } : null,
     owner: {},
     priceSettings: {},
     tier,
@@ -27,9 +29,9 @@ const getEnhancedDragon = (dragon) => {
     percent,
     secretGene,
     motherType: motherExists ? mother.type : null,
-    motherTier: motherInfo ? motherInfo.tier : null,
+    // motherTier: motherInfo ? motherInfo.tier : null,
     fatherType: fatherExists ? father.type : null,
-    fatherTier: fatherInfo ? fatherInfo.tier : null,
+    // fatherTier: fatherInfo ? fatherInfo.tier : null,
     firstborn: !motherExists && !fatherExists
   }
 }
