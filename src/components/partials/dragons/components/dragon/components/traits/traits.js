@@ -76,18 +76,39 @@ const genes = [
 const Traits = ({ genome }) => {
   const [open, setOpen] = useState(false)
   const [maxHeight, setMaxHeight] = useState('60rem')
+  const col1 = []
+  const col2 = []
 
   useEffect(() => {
     if (open) {
-      console.log(window.innerHeight)
-
       const newMaxHeight = window.innerHeight * 0.9
 
       setMaxHeight(newMaxHeight + 'px')
-
-      console.log(newMaxHeight + 'px')
     }
   }, [open])
+
+  for (let i = 0; i < genome.length; i++) {
+    const gene = genes[i]
+    const trait = genome[i]
+
+    const jsx = (
+      <Stat key={gene}>
+        <StatIconContainer backgroundColor={trait > 0 || i < 15 ? '#f3e6ff' : '#eee'}>
+          <span className="material-icons" style={trait > 0 || i < 15 ? { color: '#6900cc' } : {}}>
+            fingerprint
+          </span>
+        </StatIconContainer>
+
+        <StatContent>
+          <StatLabel>{gene}</StatLabel>
+          <StatValue>#{trait}</StatValue>
+        </StatContent>
+      </Stat>
+    )
+
+    if (i <= 12) col1.push(jsx)
+    if (i > 12) col2.push(jsx)
+  }
 
   return (
     <MainContainer>
@@ -113,22 +134,8 @@ const Traits = ({ genome }) => {
             </IconButton>
 
             <StatsContainer>
-              {genome.map((trait, i) => {
-                const gene = genes[i]
-
-                return (
-                  <Stat key={gene}>
-                    <StatIconContainer>
-                      <span className="material-icons">fingerprint</span>
-                    </StatIconContainer>
-
-                    <StatContent>
-                      <StatLabel>{gene}</StatLabel>
-                      <StatValue>#{trait}</StatValue>
-                    </StatContent>
-                  </Stat>
-                )
-              })}
+              <div>{col1}</div>
+              <div>{col2}</div>
             </StatsContainer>
           </div>
         </Box>

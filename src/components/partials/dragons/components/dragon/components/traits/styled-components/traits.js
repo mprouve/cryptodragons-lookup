@@ -9,35 +9,38 @@ export const StatsContainer = styled.div`
   font-size: 0;
 
   & > div {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
     margin-top: 1.5rem;
-    
+
     @media (max-width: 650px) {
+      display: block;
+      width: 100%;
       margin-left: 0;
     }
   }
 
-  & > div:nth-child(2n) {
+  & > div:last-child {
     margin-left: 4%;
 
     @media (max-width: 650px) {
       margin-left: 0;
+      margin-top: 1rem;
     }
+  }
+
+  & > div > div:nth-child(1) {
+    margin-top: 0;
   }
 `
 
 export const Stat = styled.div`
-  display: inline-block;
-  width: 48%;
-  vertical-align: top;
-
-  @media (max-width: 650px) {
-    display: block;
-    width: 100%;
-  }
+  margin-top: 1rem;
 `
 
 export const StatIconContainer = styled.div`
-  background-color: #eee;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   display: block;
   float: left;
   width: 2.3rem;
