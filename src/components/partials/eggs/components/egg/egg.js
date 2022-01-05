@@ -94,7 +94,16 @@ const Egg = ({ egg }) => {
 
           <StatContent>
             <StatLabel>Dragon ID</StatLabel>
-            <StatValue>{dragonId || 'N/A'}</StatValue>
+            {dragonId ? (
+              <StatValue>
+                <a
+                  href={`/dragon/${dragonId}`}
+                  target="_blank"
+                  rel="noreferrer">{`#${dragonId}`}</a>
+              </StatValue>
+            ) : (
+              <StatValue>None</StatValue>
+            )}
           </StatContent>
         </Stat>
 
