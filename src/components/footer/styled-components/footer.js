@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import theme from "../../../res/theme.js"
+import styled from 'styled-components'
+import theme from '../../../res/theme.js'
 
 export const FooterContainer = styled.footer`
   background-color: #ddd;
@@ -116,5 +116,20 @@ export const UserName = styled.p`
 `
 
 export const UserSocialContainer = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0;
+`
+
+export const SocialImg = styled.img`
+  display: inline-block;
+  width: 2.5rem;
+  height: auto;
+  margin: 0.3rem 1rem;
+  vertical-align: middle;
+
+  &:link,
+  &:visited,
+  &:active {
+  }
 `

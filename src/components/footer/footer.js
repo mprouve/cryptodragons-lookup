@@ -1,18 +1,24 @@
-import React from "react"
-import CryptoDragonsLogo from "../../media/images/logo/cryptodragons-logo.png"
+import React from 'react'
+import CryptoDragonsLogo from '../../media/images/logo/cryptodragons-logo.png'
+import DiscordIcon from '../../media/images/social-icons/discord.png'
+import GithubIcon from '../../media/images/social-icons/git.png'
+import InstagramIcon from '../../media/images/social-icons/instagram.png'
+import LinkedInIcon from '../../media/images/social-icons/linkedin.png'
+import RedditIcon from '../../media/images/social-icons/reddit.png'
+import TwitterIcon from '../../media/images/social-icons/twitter.png'
 import {
   FooterContainer,
   FooterInnerContainer,
   UserDetailsContainer,
   UserDetails,
   UserName,
-  // UserSocialContainer,
   Logo,
   Links,
   Link,
-  //   Copyright,
   Notice,
-} from "./styled-components/footer.js"
+  UserSocialContainer,
+  SocialImg
+} from './styled-components/footer.js'
 // import config from "../../config"
 
 const Footer = (props) => {
@@ -51,6 +57,35 @@ const Footer = (props) => {
             {/* <UserSocialContainer></UserSocialContainer> */}
           </UserDetails>
         </UserDetailsContainer>
+
+        <UserSocialContainer>
+          <a href="https://twitter.com/marco_prouve" target="_blank" rel="noreferrer">
+            <SocialImg src={TwitterIcon} alt="Twitter Logo" />
+          </a>
+
+          <a href="https://www.instagram.com/marcoprouve/" target="_blank" rel="noreferrer">
+            <SocialImg src={InstagramIcon} alt="Instagram Logo" />
+          </a>
+
+          <a href="https://www.linkedin.com/in/marcoprouve/" target="_blank" rel="noreferrer">
+            <SocialImg src={LinkedInIcon} alt="LinkedIn Logo" />
+          </a>
+
+          <a
+            href="https://discordapp.com/users/328009884660662272/"
+            target="_blank"
+            rel="noreferrer">
+            <SocialImg src={DiscordIcon} alt="Discord Logo" />
+          </a>
+
+          <a href="https://github.com/mprouve" target="_blank" rel="noreferrer">
+            <SocialImg src={GithubIcon} alt="Github Logo" />
+          </a>
+
+          <a href="https://www.reddit.com/user/marcoprouve" target="_blank" rel="noreferrer">
+            <SocialImg src={RedditIcon} alt="Reddit Logo" />
+          </a>
+        </UserSocialContainer>
       </FooterInnerContainer>
     </FooterContainer>
   )
