@@ -1,29 +1,29 @@
-import config from "../../../config.js"
-import { toasterActions } from "../../action-creators/toaster.js"
-import { dragonsActions } from "../../action-creators/dragons.js"
-import { eggsActions } from "../../action-creators/eggs.js"
+import config from '../../../config.js'
+import { toasterActions } from '../../action-creators/toaster.js'
+import { dragonsActions } from '../../action-creators/dragons.js'
+import { eggsActions } from '../../action-creators/eggs.js'
 
 /*
  * METHOD TO GET DRAGON BY ID
  */
-export const getDragon = (params) => {
-  let responseCode = ""
-  const method = "GET"
+export const getDragon = (params, options = {}) => {
+  let responseCode = ''
+  const method = 'GET'
   const url = `${config.api}/dragon/${params.dragonId}`
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json'
   }
 
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
   return (dispatch) => {
-    console.log("Sending get dragon by ID request to CryptoDragons")
+    console.log('Sending get dragon by ID request to CryptoDragons')
 
     // Return the fetch so react components calling 'store.dispatch()' can use 'then()'
     return fetch(url, {
       method,
-      headers,
+      headers
     })
       .then((response) => {
         responseCode = response.status
@@ -34,14 +34,19 @@ export const getDragon = (params) => {
         console.log({ data })
 
         if (responseCode === 200) {
-          dispatch(toasterActions.set("Successfully retrieved dragon!"))
+          if (options.addData) {
+            dispatch(dragonsActions.add([data.result]))
+          } else {
+            dispatch(dragonsActions.set([data.result]))
+          }
+
+          dispatch(toasterActions.set(options.customMessage || 'Successfully retrieved dragon!'))
           dispatch(eggsActions.clear())
-          dispatch(dragonsActions.set([data.result]))
 
           return {
             error: false,
             code: responseCode,
-            message: "Successfully retrieved dragon!",
+            message: options.customMessage || 'Successfully retrieved dragon!',
             data
           }
         }
@@ -49,7 +54,7 @@ export const getDragon = (params) => {
         dispatch(
           toasterActions.set(
             responseCode === 404
-              ? "Dragon not found."
+              ? 'Dragon not found.'
               : "Something wen't wrong. Please try again later"
           )
         )
@@ -59,8 +64,8 @@ export const getDragon = (params) => {
           code: responseCode === 404,
           message:
             responseCode === 404
-              ? "Dragon not found."
-              : "Something wen't wrong. Please try again later",
+              ? 'Dragon not found.'
+              : "Something wen't wrong. Please try again later"
         }
       })
       .catch((error) => {
@@ -68,8 +73,8 @@ export const getDragon = (params) => {
 
         return {
           error: true,
-          code: "",
-          message: "Something wen't wrong. Please try again later",
+          code: '',
+          message: "Something wen't wrong. Please try again later"
         }
       })
   }

@@ -1,17 +1,17 @@
-import config from "../../../config.js"
-import { toasterActions } from "../../action-creators/toaster.js"
-import { dragonsActions } from "../../action-creators/dragons.js"
-import objectToQueryString from "../../../utils/functions/object-to-query-string.js"
+import config from '../../../config.js'
+import { toasterActions } from '../../action-creators/toaster.js'
+import { dragonsActions } from '../../action-creators/dragons.js'
+import objectToQueryString from '../../../utils/functions/object-to-query-string.js'
 
 /*
  * METHOD TO GET DRAGONS BY IDs
  */
-export const getDragons = (params, loadMore) => {
-  let responseCode = ""
-  const method = "GET"
+export const getDragons = (params, options = {}) => {
+  let responseCode = ''
+  const method = 'GET'
   let url = `${config.api}/dragons`
   const headers = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json'
   }
 
   // Use objectToQueryString util function to turn params into a query string and append it to URL
@@ -23,12 +23,12 @@ export const getDragons = (params, loadMore) => {
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
   return (dispatch) => {
-    console.log("Sending get dragons by ID request to CryptoDragons")
+    console.log('Sending get dragons by ID request to CryptoDragons')
 
     // Return the fetch so react components calling 'store.dispatch()' can use 'then()'
     return fetch(url, {
       method,
-      headers,
+      headers
     })
       .then((response) => {
         responseCode = response.status
@@ -39,9 +39,9 @@ export const getDragons = (params, loadMore) => {
         console.log({ data })
 
         if (responseCode === 200) {
-          dispatch(toasterActions.set("Successfully retrieved dragons!"))
+          dispatch(toasterActions.set(options.customMessage || 'Successfully retrieved dragons!'))
 
-          if (loadMore) {
+          if (options.addData) {
             dispatch(dragonsActions.add(data.items))
           } else {
             dispatch(dragonsActions.set(data.items))
@@ -50,15 +50,15 @@ export const getDragons = (params, loadMore) => {
           return {
             error: false,
             code: responseCode,
-            message: "Successfully retrieved dragons!",
-            data,
+            message: options.customMessage || 'Successfully retrieved dragons!',
+            data
           }
         }
 
         dispatch(
           toasterActions.set(
             responseCode === 404
-              ? "Dragons not found."
+              ? 'Dragons not found.'
               : "Something wen't wrong. Please try again later"
           )
         )
@@ -68,8 +68,8 @@ export const getDragons = (params, loadMore) => {
           code: responseCode === 404,
           message:
             responseCode === 404
-              ? "Dragons not found."
-              : "Something wen't wrong. Please try again later",
+              ? 'Dragons not found.'
+              : "Something wen't wrong. Please try again later"
         }
       })
       .catch((error) => {
@@ -77,8 +77,8 @@ export const getDragons = (params, loadMore) => {
 
         return {
           error: true,
-          code: "",
-          message: "Something wen't wrong. Please try again later",
+          code: '',
+          message: "Something wen't wrong. Please try again later"
         }
       })
   }

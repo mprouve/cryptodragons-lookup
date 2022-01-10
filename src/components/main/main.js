@@ -4,6 +4,7 @@ import Home from './home/home.js'
 import User from './user/user.js'
 import Dragon from './dragon/dragon.js'
 import Egg from './egg/egg.js'
+import ArenaSimulator from './arena-simulator/arena-simulator.js'
 import PageNotFound from './page-not-found/page-not-found.js'
 
 const Main = () => {
@@ -14,6 +15,7 @@ const Main = () => {
         <Route path="/user/:address" element={<User />} />
         <Route path="/dragon/:dragonId" element={<Dragon />} />
         <Route path="/egg/:eggId" element={<Egg />} />
+        <Route path="/arena-simulator" element={<ArenaSimulator />} />
 
         {/* 404 Route */}
         <Route path="*" element={<PageNotFound />} />

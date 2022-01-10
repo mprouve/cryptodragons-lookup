@@ -81,7 +81,7 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
       isMock: false
     }
 
-    dispatch(getDragons(query, false))
+    dispatch(getDragons(query))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)
@@ -118,7 +118,7 @@ const DragonsSearch = ({ processing, setProcessing, setError }) => {
     const page = oldPage + 1
     const query = { ...dragonsQuery, from, page }
 
-    dispatch(getDragons(query, true))
+    dispatch(getDragons(query, { addData: true }))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)

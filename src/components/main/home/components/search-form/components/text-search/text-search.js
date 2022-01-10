@@ -136,16 +136,16 @@ const TextSearch = ({ searchType, processing, setProcessing, setError }) => {
           dispatch(
             getEggs({ owner: search, currentUserId: search, isMock: false, limit: 0, page: 1 })
           ).then((data2) => {
-            if (!data1.error) {
-              console.log('[SUCCESS]: ', data1.message)
+            if (!data2.error) {
+              console.log('[SUCCESS]: ', data2.message)
 
               dispatch(dragonsQueryActions.clear())
               dispatch(eggsQueryActions.clear())
               setError('')
             } else {
-              console.log('[FAIL]: ', data1.message)
+              console.log('[FAIL]: ', data2.message)
 
-              setError(data1.message)
+              setError(data2.message)
             }
 
             setProcessing(false)

@@ -30,12 +30,7 @@ const Footer = (props) => {
         <Logo src={CryptoDragonsLogo} alt="CryptoDragons Logo" />
 
         <Links>
-          <Link
-            href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
-            target="_blank"
-            rel="noreferrer">
-            Dragon Breeding Guide
-          </Link>
+          <Link href="/arena-simulator">Arena Simulator</Link>
 
           <Link
             href="https://chrome.google.com/webstore/detail/dragon-stat-calculator/npbbffpmhkbcebmamddilhalnbppecmh?hl=en-US&authuser=1"
@@ -44,16 +39,25 @@ const Footer = (props) => {
             Chrome Extension
           </Link>
 
+          <Link
+            href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
+            target="_blank"
+            rel="noreferrer">
+            Dragon Breeding Guide
+          </Link>
+
           <a href="mailto:marcoprouve@gmail.com">Contact Support</a>
         </Links>
 
         <Notice>
-          Note: This is site is an <u>unofficial</u> page for CryptoDragons
+          Note: This site is an <u>unofficial</u> page for CryptoDragons
         </Notice>
 
         <UserDetailsContainer>
           <UserDetails>
-            <UserName>Developed by Marco Prouve</UserName>
+            <UserName>
+              Developed by <b>Marco Prouve</b>
+            </UserName>
             {/* <UserSocialContainer></UserSocialContainer> */}
           </UserDetails>
         </UserDetailsContainer>
