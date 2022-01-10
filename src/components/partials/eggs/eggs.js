@@ -34,7 +34,7 @@ const Eggs = ({ eggs, isHatched }) => {
     const page = oldPage + 1
     const query = { ...eggsQuery, isHatched, from, page }
 
-    dispatch(getEggs(query, true))
+    dispatch(getEggs(query, { addData: true }))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)
@@ -61,7 +61,7 @@ const Eggs = ({ eggs, isHatched }) => {
 
   return (
     <MainContainer>
-      {eggs.length > 0 && (
+      {eggs.length > 1 && (
         <div>
           <Button
             variant="outlined"

@@ -56,7 +56,7 @@ const Dragon = ({ dragon }) => {
     genome,
     motherType,
     // motherTier,
-    fatherType,
+    fatherType
     // fatherTier
   } = dragon
 
@@ -98,8 +98,14 @@ const Dragon = ({ dragon }) => {
         </IconButton>
       </a>
 
-      <a href={`/user/${ownerId}`} target="_blank" rel="noreferrer">
+      <a href={`/arena-simulator/?dragonOne=${id}`} target="_blank" rel="noreferrer">
         <IconButton sx={{ ...styles.link, right: '3rem' }}>
+          <span className="material-icons">stadium</span>
+        </IconButton>
+      </a>
+
+      <a href={`/user/${ownerId}`} target="_blank" rel="noreferrer">
+        <IconButton sx={{ ...styles.link, right: '5.5rem' }}>
           <span className="material-icons">person_search</span>
         </IconButton>
       </a>

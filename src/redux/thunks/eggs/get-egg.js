@@ -6,7 +6,7 @@ import { eggsActions } from '../../action-creators/eggs.js'
 /*
  * METHOD TO GET EGG BY ID
  */
-export const getEgg = (params) => {
+export const getEgg = (params, options = {}) => {
   let responseCode = ''
   const method = 'GET'
   const url = `${config.api}/egg/${params.eggId}`
@@ -34,14 +34,19 @@ export const getEgg = (params) => {
         console.log({ data })
 
         if (responseCode === 200) {
-          dispatch(toasterActions.set('Successfully retrieved egg!'))
+          if (options.addData) {
+            dispatch(eggsActions.add([data.result]))
+          } else {
+            dispatch(eggsActions.set([data.result]))
+          }
+
+          dispatch(toasterActions.set(options.customMessage || 'Successfully retrieved egg!'))
           dispatch(dragonsActions.clear())
-          dispatch(eggsActions.set([data.result]))
 
           return {
             error: false,
             code: responseCode,
-            message: 'Successfully retrieved egg!',
+            message: options.customMessage || 'Successfully retrieved egg!',
             data
           }
         }

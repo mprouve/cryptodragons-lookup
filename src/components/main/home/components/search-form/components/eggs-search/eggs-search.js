@@ -59,7 +59,7 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
       showBlacklisted: true
     }
 
-    dispatch(getEggs(query, false))
+    dispatch(getEggs(query))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)
@@ -97,7 +97,7 @@ const EggsSearch = ({ setTab, processing, setProcessing, setError }) => {
     const page = oldPage + 1
     const query = { ...eggsQuery, isHatched, from, page }
 
-    dispatch(getEggs(query, true))
+    dispatch(getEggs(query, { addData: true }))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)

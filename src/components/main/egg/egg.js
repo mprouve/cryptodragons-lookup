@@ -5,29 +5,29 @@ import { getEgg } from '../../../redux/thunks/eggs/get-egg.js'
 import { dragonsQueryActions } from '../../../redux/action-creators/dragons-query.js'
 import { eggsQueryActions } from '../../../redux/action-creators/eggs-query.js'
 import { useSelector } from 'react-redux'
-import Button from '@mui/material/Button'
+// import Button from '@mui/material/Button'
 import Eggs from '../../partials/eggs/eggs.js'
 import {
   MainContainer,
-  BannerOuterContainer,
-  BannerInnerContainer,
-  BannerText,
+  // BannerOuterContainer,
+  // BannerInnerContainer,
+  // BannerText,
   UserContainer,
   UserAddress,
   ContentContainer
 } from './styled-components/egg.js'
 
-const styles = {
-  chromeButton: {
-    display: 'inline-block',
-    width: '12rem',
-    minHeight: '2.3rem',
-    height: '2.3rem',
-    margin: '0 .5rem',
-    lineHeight: '1rem',
-    verticalAlign: 'middle'
-  }
-}
+// const styles = {
+//   chromeButton: {
+//     display: 'inline-block',
+//     width: '12rem',
+//     minHeight: '2.3rem',
+//     height: '2.3rem',
+//     margin: '0 .5rem',
+//     lineHeight: '1rem',
+//     verticalAlign: 'middle'
+//   }
+// }
 
 const Egg = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -60,7 +60,7 @@ const Egg = () => {
 
   return (
     <MainContainer>
-      <BannerOuterContainer>
+      {/* <BannerOuterContainer>
         <BannerInnerContainer>
           <BannerText>
             Have you downloaded{' '}
@@ -82,7 +82,7 @@ const Egg = () => {
             </Button>
           </a>
         </BannerInnerContainer>
-      </BannerOuterContainer>
+      </BannerOuterContainer> */}
 
       <UserContainer>
         <UserAddress>Egg ID - #{params.eggId}</UserAddress>

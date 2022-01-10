@@ -46,7 +46,7 @@ const Dragons = ({ dragons }) => {
     const page = oldPage + 1
     const query = { ...dragonsQuery, from, page }
 
-    dispatch(getDragons(query, true))
+    dispatch(getDragons(query, { addData: true }))
       .then((data) => {
         if (!data.error) {
           console.log('[SUCCESS]: ', data.message)
@@ -73,7 +73,7 @@ const Dragons = ({ dragons }) => {
 
   return (
     <MainContainer>
-      {sortedDragons.length > 0 && (
+      {sortedDragons.length > 1 && (
         <div>
           <Button
             variant="outlined"
