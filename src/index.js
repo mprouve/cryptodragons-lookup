@@ -23,6 +23,8 @@ ReactDOM.render(
         <GlobalStyles />
 
         <App />
+
+        <div id="portal-root" />
       </ThemeProvider>
     </BrowserRouter>
   </Provider>,
