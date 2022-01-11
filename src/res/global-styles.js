@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from 'styled-components'
 import theme from './theme.js'
 
 // export const lightTheme = {
@@ -141,5 +141,18 @@ export const GlobalStyles = createGlobalStyle`
         color: inherit;
         text-decoration: none;
         outline : none ;
+    }
+
+    #portal-root {
+        position: relative;
+        z-index: 999;
+    }
+
+    .portal {
+        position: fixed;
+        top: 4rem;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 `

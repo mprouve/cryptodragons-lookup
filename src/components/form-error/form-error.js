@@ -1,14 +1,16 @@
-import React from "react"
-import styled from "styled-components"
-import theme from "../../res/theme.js"
+import React from 'react'
+import styled from 'styled-components'
+import theme from '../../res/theme.js'
 
 const ErrorContainer = styled.div`
-  background-color: ${theme.palette.error};
+  background-color: ${({ variant }) => (variant === 'outlined' ? 'inherit' : theme.palette.error)};
   width: 100%;
-  padding: .8rem 1rem;
+  padding: 0.8rem 1rem;
   margin-bottom: 1rem;
+  border: ${({ variant }) =>
+    variant === 'outlined' ? `1px solid ${theme.palette.error}` : 'none'};
   border-radius: 0.3rem;
-  color: #fff;
+  color: ${({ variant }) => (variant === 'outlined' ? theme.palette.error : '#fff')};
   box-sizing: border-box;
   line-height: 1rem;
   text-align: left;
@@ -18,15 +20,16 @@ const ErrorContainer = styled.div`
 `
 
 const FormError = (props) => {
-  const message =
-    typeof props.message === "undefined" || props.message === null
-      ? "Something went wrong."
-      : props.message.toString()
+  const { variant, style, message } = props
+  const newMessage =
+    typeof message === 'undefined' || message === null
+      ? 'Something went wrong.'
+      : message.toString()
 
-  if (props.message !== "") {
+  if (newMessage !== '') {
     return (
-      <ErrorContainer style={props.style ? props.style : {}}>
-        {message}
+      <ErrorContainer style={style || {}} variant={variant || 'contained'}>
+        {newMessage}
       </ErrorContainer>
     )
   } else {

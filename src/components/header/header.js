@@ -1,5 +1,6 @@
 import React from 'react'
 import ScrollToTop from './components/scroll-to-top/scroll-to-top.js'
+import DonationPortal from '../partials/donation-portal/donation-portal.js'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -8,20 +9,22 @@ import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-// import Avatar from "@mui/material/Avatar"
 import Button from '@mui/material/Button'
-// import Tooltip from "@mui/material/Tooltip"
 import MenuItem from '@mui/material/MenuItem'
+import Divider from '@mui/material/Divider'
 import Fab from '@mui/material/Fab'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-
-// const settings = ["Profile", "Account", "Dashboard", "Logout"]
 
 const styles = {
   headerButton: {
     '&:hover': {
       backgroundColor: '#eee'
     }
+  },
+  donateMenuButton: {
+    display: { xs: 'inline-flex', md: 'none' },
+    minHeight: '2.3rem',
+    height: '2.3rem'
   },
   menuItem: {
     padding: '.5rem 1rem',
@@ -34,11 +37,16 @@ const styles = {
   typography: {
     lineHeight: '1rem',
     fontSize: '1rem'
+  },
+  divider: {
+    display: { xs: 'flex', md: 'none' },
+    margin: '.4rem 0'
   }
 }
 
 const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
+  const [donationOpen, setDonationOpen] = React.useState(false)
   // const [anchorElUser, setAnchorElUser] = React.useState(null)
   const HeaderTitle = 'CryptoDragons Lookup'
 
@@ -48,6 +56,12 @@ const Header = (props) => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
+  }
+
+  const handleDonate = () => {
+    console.log('Donating')
+
+    setDonationOpen(true)
   }
 
   // const handleOpenUserMenu = (event) => {
@@ -60,6 +74,8 @@ const Header = (props) => {
 
   return (
     <AppBar position="fixed" color="default">
+      {donationOpen && <DonationPortal setOpen={setDonationOpen} />}
+
       <Container maxWidth={false}>
         <Toolbar disableGutters sx={{ minHeight: '4rem' }}>
           <a href="/">
@@ -92,6 +108,18 @@ const Header = (props) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}></Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Button
+              color="primary"
+              variant="contained"
+              sx={{
+                ...styles.donateButton,
+                display: { xs: 'none', md: 'inline-flex' },
+                marginRight: '1rem'
+              }}
+              onClick={handleDonate}>
+              Donate
+            </Button>
+
             <a href="/arena-simulator">
               <Button
                 sx={{
@@ -111,23 +139,9 @@ const Header = (props) => {
                 sx={{
                   ...styles.headerButton,
                   display: { xs: 'none', md: 'inline-flex' },
-                  marginRight: '1rem'
-                }}>
-                Chrome Extension
-              </Button>
-            </a>
-
-            <a
-              href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
-              target="_blank"
-              rel="noreferrer">
-              <Button
-                sx={{
-                  ...styles.headerButton,
-                  display: { xs: 'none', md: 'inline-flex' },
                   marginRight: '1.7rem'
                 }}>
-                Breeding Guide
+                Chrome Extension
               </Button>
             </a>
 
@@ -155,10 +169,20 @@ const Header = (props) => {
                 horizontal: 'left'
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block' }
-              }}>
+              onClose={handleCloseNavMenu}>
+              <div style={{ margin: '0 .5rem' }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={handleDonate}
+                  sx={styles.donateMenuButton}>
+                  Donate
+                </Button>
+              </div>
+
+              <Divider sx={styles.divider} light />
+
               <a href="/">
                 <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
                   <span className="material-icons">home</span>
@@ -197,9 +221,7 @@ const Header = (props) => {
                 href="https://docs.google.com/spreadsheets/d/1HYK8dKyQb3e7nsAz88n3_M7LD6vu40lDn5lOm-h6OCE/edit?usp=sharing"
                 target="_blank"
                 rel="noreferrer">
-                <MenuItem
-                  onClick={handleCloseNavMenu}
-                  sx={{ ...styles.menuItem, display: { md: 'none' } }}>
+                <MenuItem onClick={handleCloseNavMenu} sx={styles.menuItem}>
                   <span className="material-icons">article</span>
                   <Typography textAlign="center" sx={styles.typography}>
                     Breeding Guide
