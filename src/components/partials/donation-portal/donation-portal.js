@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ethers } from 'ethers'
 import { ClickAwayListener } from '@mui/material'
-import MetamaskLogo from '../../../media/images/branding/metamask/metamask-logo.png'
+// import MetamaskLogo from '../../../media/images/branding/metamask/metamask-logo.png'
 import Portal from '../../portal/portal.js'
 import FormError from '../../form-error/form-error.js'
 import Button from '@mui/material/Button'
@@ -15,7 +15,7 @@ import {
   WalletAddress,
   EtherscanLink,
   Input,
-  BrandingImage,
+  // BrandingImage,
   TransactionsHeader,
   Transaction
 } from './styled-components/donation-portal.js'

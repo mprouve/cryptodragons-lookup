@@ -114,7 +114,10 @@ const Header = (props) => {
               sx={{
                 ...styles.donateButton,
                 display: { xs: 'none', md: 'inline-flex' },
-                marginRight: '1rem'
+                marginRight: '1rem',
+                minHeight: '2.5rem',
+                height: '2.5rem',
+                width: '11rem'
               }}
               onClick={handleDonate}>
               Donate
